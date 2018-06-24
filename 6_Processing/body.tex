@@ -1,0 +1,245 @@
+\chapter{Interface and software for near-real-time processing and feedback}
+
+\label{chapter:processing}
+\thispagestyle{myheadings}
+
+% path to figures for this chapter
+% must have a trailing slash
+\graphicspath{{6_Processing/Figures/}}
+
+\section{Introduction}
+
+% TODO: introduction
+
+\section{Methods}
+
+% TODO: introduce methods section
+
+\subsection{Chronic fiber interface}
+
+% TODO: revise paragraph
+In order to deploy the fiber bundles in awake behaving experimental 
+paradigms, we envision an implementation of the bundle interface where
+ the animal is housed in an enclosure below a traditional fluorescence
+ microscope with the ensheathed bundle running from the microscope to 
+the implant point (see figure x). Depending on the duration of the 
+experiment, the fiber can be fixed below the microscope objective or 
+placed on a low-friction passive commutator (e.g., using precision 
+ball bearings) that allows the fiber bundle to rotate as the animal 
+moves. Given the flexibility of the fiber bundle, it may be necessary 
+to add a second material that helps translate the rotational torque to
+ the commutator. During post-processing of the acquired recordings, 
+the rotation of the fiber bundle can be corrected through 
+registration.
+
+\subsection{Acquisition hardware}
+
+% TODO: describe acquisition hardware
+
+\subsection{Acquisition software}
+
+% TODO: describe two software acquisition approaches
+
+\subsection{Near-real-time software}
+
+To manage and trigger acquisition, and to do near-real-time signal
+processing, we created custom image acquisition software that runs
+on the macOS operating system (\fref{fig:software}). Leveraging the 
+native AVFoundation
+framework, the software is capable of communicating with USB video 
+acquisition hardware, including both analog-to-digital frame 
+grabbers and cameras. The software can captured video or video 
+synchronized with a multi-channel analog data stream (including 
+either audio or other analog data). Video and analog data are 
+written to disk in MPEG-4 container files with video encoded at 
+full resolution either uncompressed or using the H.264 or lossless 
+MJPEG Open DML codecs and audio encoded using either the AAC codec 
+or the linear PCM format with a sampling rate of up to 
+96~\si{\kilo\hertz}. Simultaneously, the software writes metadata 
+including frame timing, region of interest intensity and feedback 
+parameters to a text table (CSV format).
+
+\begin{figure}
+\includegraphics[width=\textwidth]{fig2-software.png}
+\caption[Software for capture near-real-time analysis]{\textbf{User interface of acquisition
+control software capable of near-real-time analysis.} The software 
+controls capture related peripherals, including USB camera sensors,
+light sources and microcontroller breakout boxes, and manages 
+synchronized acquisition of video and analog signals. During 
+acquisition, the software can process video frames, extracting 
+multiple annotated regions of interest, and can process analog 
+signals, such as applying audio template matching. Analysis 
+can trigger external feedback, acting as a basic brain machine 
+interface.}
+\label{fig:software}
+\end{figure}
+
+In addition, the software communicates with a microcontroller 
+(Arduino Uno Rev3 or 2560 Mega) via a USB-to-serial connection. The 
+microcontroller allows the software to control additional 
+peripherals, including light source brightness, external acquisition 
+cameras and the commutator.
+
+The software is able to perform near real-time analysis on both the 
+video frames and the analog input channels---these channels enable
+low-latency, video-aligned acquisition of audio, external TTL 
+pulses, electrophysiology or data regarding behavioral context. 
+For example, in our experiments recording fluorescence in songbirds, 
+we use the analog channels to acquire audio and trigger acquisition 
+based off song detection (by processing audio through a short-time
+Fourier transform to calculate the ratio of power in frequency 
+bins associated with song [1--10~kHz] to the power of frequency bins outside 
+the song range). The microcontroller is used to activate 
+the excitation light source, restricting illumination to periods of 
+singing and, as a result, restricting photobleaching. 
+
+During monitoring and acquisition, the software can perform low-latency
+computational analysis of both the video frames and analog input. In 
+the case of the video, the user interface provides the ability to 
+draw regions of interest (ROIs) onto the field of view and processing 
+rules in the form of symbolic equations that can be used to trigger 
+external feedback (e.g., sound or reward). At the start of
+acquisition, the software converts the regions of interest into indices 
+corresponding with the ROI masks and parses the symbolic equations 
+into an abstract syntax tree (AST) for optimization and evaluation. 
+Each frame is read in YCbCr color 
+space, providing direct access to the luma component (Y). Using vector
+optimized instructions when available, the software accumulates average 
+pixel intensity for each region of interest and then evaluates the 
+syntax tree and outputs the appropriate feedback value. \Fref{fig:software} 
+shows the software configured to compare $\Delta$F values for two 
+regions of interest corresponding with two fibers.
+
+In addition, the software can perform low-latency computational 
+analysis of the analog inputs. Given the broader range of analog 
+applications and analysis, the software does not have a graphical 
+user interface for defining analysis, but the code provides clear 
+points for extension. We have extended and open sourced versions 
+of the software that use the analog signals to acquire synchronized 
+audio. Acquired audio is converted to a spectral representation 
+through a two-taper short-time Fourier transform (STFT). These 
+analysis steps leverage the vDSP Accelerate framework, which 
+relies on vectorized instructions whenever possible and achieving 
+low latency processing. We use the spectral representation to 
+trigger acquisition (during singing). In addition, the spectral
+representation can serve as an input to a neural network trained 
+to precisely identify salient audio (i.e., a syllable or other 
+vocalization) \cite{Pearre:2017cs}; this enables providing 
+aversive white noise feedback during syllable presentation.
+
+To evaluate performance of the software, we blink an LED in the 
+field of view of the camera, while recording the output trigger 
+controlled by the software to detect when the LED intensity is 
+detectable. The LED activation triggers activation on an 
+oscilloscope, which is to averaging mode (128-trigger average) 
+in order to collect latency data. In addition, external logging
+flags in the software are used to evaluate processing time for 
+specific steps in the analysis pipeline (such as ROI extraction).
+Audio processing is evaluated as described in \cite{Pearre:2017cs},
+using recordings of songs with a ground truth annotation on the 
+second channel. The ground truth signal triggers oscilloscope 
+acquisition, again averaging over 128 trials to build a distribution 
+of timing performance.
+
+\subsection{Synchronized acquisition}
+
+% TODO: show synchronized acquisition circuit
+
+\subsection{Analysis pipeline}
+
+% TODO: describe node based analysis pipeline
+
+\section{Results}
+
+% TODO: write some results
+% commutator
+% software latency
+
+\subsection{Analysis performance}
+
+To evaluate the near-real-time analysis and feedback, we recorded 
+signals that provide a reference signal that represents the 
+ground truth. 
+
+% TODO: ideally remeasure and generate new figure
+Region of interest (ROI) video analysis was evaluated by measuring the
+time from LED onset to software feedback. The average time to trigger 
+a feedback stimulus is 23.9 $\pm$ 7.9~ms (95\% confidence interval), 
+including frame exposure, digitization, transmission, data acquisition 
+and software processing. This latency reflects the intrinsic 
+limitations of the 33~ms exposure time (which accounts for 16.5~ms of 
+the delay) as well as the time spent capturing and decoding the video, 
+and communicating an output TTL via the microcontroller. 
+\Fref{fig:video-latency} depicts video controller latency.
+
+\begin{figure}
+\includegraphics[width=\textwidth]{fig3-video-latency.eps}
+\caption[Latency for video processing]{\textbf{Video analysis 
+produces feedback in 24~ms, including exposure time.} 
+% TODO: finish caption
+
+ C. Example of feedback contingent on ROI tracking. Black: voltage driving an LED light flash that is recorded in the field of the CMOS; blue: the cumulative probability density function (CDF) of a brief TTL pulse triggered by the software in response to the LED flash processed through the entire acquisition system. Event detection was based on ROI analysis on a Mac Mini computer. Latency of the full loop from camera to Arduino based TTL output is approximately 23.9 ms ± 7.9 ms (95\% confidence interval), with the jitter comparable to the frame rate of the camera. In this test, the LED was not synchronized to the onset of the frame, as would be the case for spontaneous video recording of neural activity. This represents the experimentally relevant performance of the system, intrinsically limited by the 33 ms frame rate of the camera. D. Of the total latency, image processing to extract fluorescence from ten cell-sized regions of interest contributes an average of only 0.17 ms; much of the ROI feedback latency is a reflection of the frame rate and acquisition time.
+
+}
+\label{fig:video-latency}
+\end{figure}
+
+
+Figure 2C depicts time between LED onset and feedback in our software 
+test bed. The average time to trigger a feedback stimulus is 23.9 
+$\pm$ 7.9~ms (95\% confidence interval), including frame exposure, 
+digitization, transmission, data acquisition and software processing. 
+This latency reflects the intrinsic limitations of the 30 FPS (33~ms) 
+frame rate as well as time spent capturing and decoding video, and 
+communicating an output TTL with the Arduino controller through the 
+serial port. Data acquisition, region of interest processing, and 
+feedback triggering all occur within an average of 1.7~ms after frame 
+capture (95\% confidence: <11~ms). This variability stems primarily 
+from video encoding and storage, where the codec and write buffering 
+necessitate increased processing time for a subset of frames. An 
+additional  source of variability in processing time, which has a 
+smaller impact and is shown Figure 2D, relates to the number and 
+complexity of the defined regions of interest. As the number and size 
+of the regions of interest increases, the processing time increases. 
+In tests involving ten cell-sized regions of interest, the average 
+processing time was 0.17~ms with a range of  0.11--0.22~ms (95\% 
+confidence interval).
+
+\begin{figure}
+\includegraphics[width=\textwidth]{fig4-audio-latency.eps}
+\caption[Latency for audio processing]{\textbf{Audio analysis 
+produces feedback output in under 5~ms.} 
+% TODO: finish caption
+}
+\label{fig:audio-latency}
+\end{figure}
+
+\section{Discussion}
+
+% TODO: write a discussion
+
+ In this paradigm, the camera can be used as a brain machine interface
+ (BMI) in which songbirds control sounds directly through the measured
+ calcium signals in the brain (Clancy et al. 2014). Other applications
+ of the software could include closed-loop stimulation experiments 
+that seek to electrically or optically disrupt patterns of activity in
+ real-time.
+
+In our tests, the latency of triggering off fluorescence activity was 
+limited by the framerate of the microscope, about 23.9 $\pm$ 7.9~ms 
+Figure 2C. For many experiments, this response latency is acceptable. 
+In the songbird, for example, the sensory-motor latency from pre-motor
+ neuron activity in HVC to auditory sensory consequences processed in 
+the basal ganglia is a minimum of 32--50~ms (Andalman \& Fee 2009). 
+Based on these estimates and published accounts of conditional 
+feedback experiments in songbirds, the time-delay should provide a 
+learnable brain machine interface (Olveczky et al. 2005), (Tumer \& 
+Brainard 2007), (Sakata \& Brainard 2008), (Sober \& Brainard 2009). 
+However it remains to be seen whether the timing jitter in the current
+ system is acceptable for brain machine interface experiments in a 
+system as precise as the songbird. For the zebra finch, relative 
+jitter between premotor commands and auditory feedback is just a few 
+milliseconds. For some experiments lower latency and lower variability
+ may be desirable, and with the introduction of faster frame rate 
+cameras and deterministic real-time operating systems, this latency 
+and latency variability will decrease.
