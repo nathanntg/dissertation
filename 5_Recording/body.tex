@@ -127,7 +127,7 @@ procedure. A metal head post was secured to the temporal bone for
 immobilizing the head during recording. Contralateral to the head 
 post, a craniotomy at either the barrel cortex or the forepaw region 
 of the primary somatosensory cortex, sized to match the fiber bundle 
-implant (0.5--1~\si{\milli\meter}). The dura within the craniotomy was
+implant (1--1.5~\si{\milli\meter}). The dura within the craniotomy was
  removed.
 
 
@@ -137,26 +137,24 @@ The fiber bundle was held in a manipulator attached to the stereotaxic
 fibers orthogonal to the surface of the brain. The fibers were slowly 
 lowered into the tissue at a rate of approximately 
 500~\si{\micro\meter} per minute. After the fibers were lowered to a 
-depth corresponding with a cortical layer V (500~\si{\micro\meter}), 
+depth corresponding with a cortical layer V (500--600~\si{\micro\meter}), 
 the bundle was secured to the skull surrounding the craniotomy with 
 acrylic.
 
-
-% TODO: select one
-In three animals, an additional craniotomy was made, contralateral to 
-the head post, and a cranial window was secured over the dura for 
-laser speckle imaging. // In three animals, the right parietal bone 
+In three animals, the right occipital bone 
 was thinned, contralateral to the headpost, for laser speckle imaging.
 
-In five animals, an additional craniotomy was made, contralateral to 
+In five animals, a frontal craniotomy was made, contralateral to 
 the head post, to allow application of KCl in order to induce a 
-cortical spreading depolarization (CSD). Until imaging, the opening 
-was sealed with agarose (1\% wt/vol, A9414, Sigma-Aldrich).
+cortical spreading depolarization (CSD). Until the CSD induction, the 
+opening was covered with gel-foam soaked with artificial 
+cerebrospinal fluid (ACSF).
 
 \subsection{Recording}
 
 During recording, mice were anesthetized with either isoflurane (1\%) 
-or $\alpha$-chloralose (Sigma-Aldrich C0128). During imaging, the body 
+or $\alpha$-chloralose (0.5-1\%, IV, 0.1 \si{\milli\liter} per 30 min, 
+Sigma-Aldrich C0128). During imaging, the body 
 temperature was monitored via a rectal probe and maintained at 
 37\si{\celsius} by a homeothermic blanket.
 
@@ -176,7 +174,7 @@ Frames were acquired using HCImage (Hamamatsu) and saved as CXD files.
 
 
 
-\paragraph{Intravenous fluorescein (FITC).} To assess fiber sensitivity to 
+\paragraph{Intravenous fluorescein isothiocyanate (FITC).} To assess fiber sensitivity to 
 fluorescent agents in the vasculature, the fibers were implanted in 
 the mice (N = 2) and recorded while injecting fluorescein 
 isothiocyanate (FITC)-labeled dextran (molecular weight 10 kDa or 2 
@@ -189,11 +187,11 @@ saline), either via the tail or retro-orbitally \cite{Yardeni:2011fs}.
 \paragraph{Inducing cortical spreading depolarization (CSD).} To measure calcium 
 fluorescence during a cortical spreading depolarization, a pellet of 
 KCl was placed on the surface of the brain of the GCaMP transgenic 
-mice (N = 5) at a second craniotomy. A drop of artificial CSF was 
+mice (N = 5) at the frontal craniotomy. A drop of ACSF was 
 placed on the pellet to dissolve the pellet. This approach is known to
  produce repeated CSDs in anesthetized mice \cite{Karatas:2013ir}. The
  pellet was prepared as described in \cite{Karatas:2013ir}, by placing
- 30 mg of KCl in an Eppendorf, adding a drop of distilled water and 
+ 30~mg of KCl in an Eppendorf, adding 10~\si{\micro\liter} of distilled water and 
 allowing the water to evaporate.
 
 
@@ -202,16 +200,20 @@ allowing the water to evaporate.
 depolarization, blood flow was monitored via laser speckle flowmetry. 
 The technique is performed as described in 
 \cite{Dunn:2001dj,Karatas:2013ir}. A 785~\si{\nano\meter} laser diode 
-(Thorlabs XX controlled by Thorlabs LDC210C) was used to illuminate 
+(Thorlabs L785-P090 controlled by Thorlabs LDC210C) was used to illuminate 
 the skull in a diffuse manner. The region was imaged via a 10$\times$ 
 objective (M Plan Apo, 0.28 NA) and recorded using a CMOS camera 
-(Basler acA2040--90um). Raw speckle images were acquired at a rate of 
-90~\si{\hertz}, and processed by computing the speckle contrast using 
-a sliding grid of 7$\times$7 pixels, and averaged \cite{Tom:2008hm}. 
-Processed images were converted to correlation time values, which are 
-inversely and linearly proportional to mean blood velocity.
-
-
+(Basler acA2040-90umNIR). A set of 15 raw speckle images was acquired 
+at a rate of 90~\si{\hertz}, with 5~ms exposure time and averaged for 
+further processing. New sets were acquired at 1-second intervals, and 
+were converted to spatial speckle contrast ($K$) using a sliding grid of 
+7$\times$7 pixels \cite{Tom:2008hm}. Speckle contrast images were 
+converted to correlation time values (using the formula $1/K^2$), which 
+are inversely and linearly proportional to mean blood velocity. Relative 
+blood flow changes in a ROI ($\sim$0.2$\times$0.2~mm) were calculated 
+by dividing correlation time values at each time point by baseline value 
+(calculated by averaging 60 images acquired over 1~min before initiation 
+of CSD).
 
 Laser speckle frame acquisition was synchronized with the fiber 
 recording by acquiring frame synchronization pulses from both cameras 
