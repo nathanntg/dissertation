@@ -46,18 +46,19 @@ To manage and trigger acquisition, and to do near-real-time signal
 processing, we created custom image acquisition software that runs
 on the macOS operating system (\fref{fig:software}). Leveraging the 
 native AVFoundation
-framework, the software is capable of communicating with USB video 
+framework, the software is capable of communicating with a wide 
+range of USB video 
 acquisition hardware, including both analog-to-digital frame 
-grabbers and cameras. The software can captured video or video 
-synchronized with a multi-channel analog data stream (including 
+grabbers and cameras. The software can capture video or video 
+synchronized with multi-channel analog data (including 
 either audio or other analog data). Video and analog data are 
 written to disk in MPEG-4 container files with video encoded at 
 full resolution either uncompressed or using the H.264 or lossless 
 MJPEG Open DML codecs and audio encoded using either the AAC codec 
 or the linear PCM format with a sampling rate of up to 
 96~\si{\kilo\hertz}. Simultaneously, the software writes metadata 
-including frame timing, region of interest intensity and feedback 
-parameters to a text table (CSV format).
+including frame timing, region of interest intensity and analysis  
+parameters to a text file (CSV format).
 
 \begin{figure}
 \includegraphics[width=\textwidth]{fig2-software.png}
@@ -74,17 +75,17 @@ interface.}
 \label{fig:software}
 \end{figure}
 
-In addition, the software communicates with a microcontroller 
+The software also communicates with a microcontroller 
 (Arduino Uno Rev3 or 2560 Mega) via a USB-to-serial connection. The 
 microcontroller allows the software to control additional 
-peripherals, including light source brightness, external acquisition 
-cameras and the commutator.
+peripherals, including light source brightness, camera parameters 
+(such as exposure) and the commutator.
 
 The software is able to perform near real-time analysis on both the 
 video frames and the analog input channels---these channels enable
 low-latency, video-aligned acquisition of audio, external TTL 
-pulses, electrophysiology or data regarding behavioral context. 
-For example, in our experiments recording fluorescence in songbirds, 
+pulses, electrophysiology or behavioral data. 
+For example, in experiments we have run recording fluorescence in songbirds, 
 we use the analog channels to acquire audio and trigger acquisition 
 based off song detection (by processing audio through a short-time
 Fourier transform to calculate the ratio of power in frequency 
@@ -110,24 +111,25 @@ syntax tree and outputs the appropriate feedback value. \Fref{fig:software}
 shows the software configured to compare $\Delta$F values for two 
 regions of interest corresponding with two fibers.
 
-In addition, the software can perform low-latency computational 
-analysis of the analog inputs. Given the broader range of analog 
-applications and analysis, the software does not have a graphical 
+Given the broader range of analog analysis and applications, 
+the software does not have a graphical 
 user interface for defining analysis, but the code provides clear 
-points for extension. We have extended and open sourced versions 
-of the software that use the analog signals to acquire synchronized 
+extension points. We have extended and open sourced versions 
+of the software that use the analog signals to acquire and process 
 audio. Acquired audio is converted to a spectral representation 
 through a two-taper short-time Fourier transform (STFT). These 
 analysis steps leverage the vDSP Accelerate framework, which 
-relies on vectorized instructions whenever possible and achieving 
+utilizes vectorized instructions whenever possible to achieve 
 low latency processing. We use the spectral representation to 
-trigger acquisition (during singing). In addition, the spectral
+trigger acquisition (during singing) and to provide behavioral
+feedback. The spectral 
 representation can serve as an input to a neural network trained 
 to precisely identify salient audio (i.e., a syllable or other 
-vocalization) \cite{Pearre:2017cs}; this enables providing 
-aversive white noise feedback during syllable presentation.
+vocalization) \cite{Pearre:2017cs}; upon detection, the software 
+can provide aversive feedback (such as burst of white noise) 
+to perturb behavior.
 
-To evaluate performance of the software, we blink an LED in the 
+To evaluate the software latency, we blink an LED in the 
 field of view of the camera, while recording the output trigger 
 controlled by the software to detect when the LED intensity is 
 detectable. The LED activation triggers activation on an 
@@ -194,7 +196,7 @@ frame rate as well as time spent capturing and decoding video, and
 communicating an output TTL with the Arduino controller through the 
 serial port. Data acquisition, region of interest processing, and 
 feedback triggering all occur within an average of 1.7~ms after frame 
-capture (95\% confidence: <11~ms). This variability stems primarily 
+capture (95\% confidence: $<$11~ms). This variability stems primarily 
 from video encoding and storage, where the codec and write buffering 
 necessitate increased processing time for a subset of frames. An 
 additional  source of variability in processing time, which has a 
@@ -202,7 +204,7 @@ smaller impact and is shown Figure 2D, relates to the number and
 complexity of the defined regions of interest. As the number and size 
 of the regions of interest increases, the processing time increases. 
 In tests involving ten cell-sized regions of interest, the average 
-processing time was 0.17~ms with a range of  0.11--0.22~ms (95\% 
+processing time was 0.17~ms with a range of 0.11--0.22~ms (95\% 
 confidence interval).
 
 \begin{figure}
@@ -226,15 +228,15 @@ that seek to electrically or optically disrupt patterns of activity in
  real-time.
 
 In our tests, the latency of triggering off fluorescence activity was 
-limited by the framerate of the microscope, about 23.9 $\pm$ 7.9~ms 
+limited by the exposure of the microscope, about 23.9 $\pm$ 7.9~ms 
 Figure 2C. For many experiments, this response latency is acceptable. 
 In the songbird, for example, the sensory-motor latency from pre-motor
  neuron activity in HVC to auditory sensory consequences processed in 
-the basal ganglia is a minimum of 32--50~ms (Andalman \& Fee 2009). 
+the basal ganglia is a minimum of 32--50~ms \cite{Andalman:2009bh}. 
 Based on these estimates and published accounts of conditional 
 feedback experiments in songbirds, the time-delay should provide a 
-learnable brain machine interface (Olveczky et al. 2005), (Tumer \& 
-Brainard 2007), (Sakata \& Brainard 2008), (Sober \& Brainard 2009). 
+learnable brain machine interface 
+\cite{Olveczky:2005bp,Tumer:2007bi,Sakata:2008cm,Sober:2009ci}. 
 However it remains to be seen whether the timing jitter in the current
  system is acceptable for brain machine interface experiments in a 
 system as precise as the songbird. For the zebra finch, relative 
