@@ -240,38 +240,99 @@ developed that incorporate some of the advantages of multi-photon
 microscopy, such as new head-mounted light-field microscopes 
 capable of high speed volumetric imaging \cite{Skocek:2018hs}.
 
-\paragraph{Fiber photometry.} % TODO: continue here
+\paragraph{Fiber photometry.} Another technology used 
+for optically interfacing with the brain is fiber photometry. 
+The technique relies on using a large diameter 
+(125~\si{\micro\meter} or more), multi-mode fiber to 
+deliver excitation light and collect fluorescence from a 
+specific region 
+\cite{Adelsberger:2005dy,Cui:2013dq,Adelsberger:2014jd}.
+Such an approach sacrifices the spatial resolution of 
+microscopy for high sensitivity, high temporal resolution 
+bulk recording. For example, it is enables recording bulk 
+fluorescence from axonal projections \cite{Gunaydin:2014dh}. 
+Such fibers setups are also frequently used to deliver 
+excitation light to opsins in the target region, in order
+to modulate neural activity \cite{Warden:2014bx}.
 
-\cite{Adelsberger:2005dy,Cui:2013dq,Adelsberger:2014jd,Gunaydin:2014dh}
+Multi-site fiber photometry has scaled these techniques up to 
+8--12 fibers, each of which can be implanted in a different site.
+Collectively, the fibers enable simultaneously recording bulk 
+fluorescence across brain regions \cite{Guo:2015gu}.
 
-multi-site
-
-\cite{Guo:2015gu}
-
-\paragraph{Waveguides and new implant.} 
-
-optoelectronic probes with embedded 
-waveguides or with on-device, implantable light sources and 
-detectors \cite{Warden:2014bx,Wu:2015gk,Segev:2017en}
-
-
-%		Miniature microscopes
-%		Multiphoton microscopy
-%		Fiber photometry
+\paragraph{Waveguides and new implant.} The three methods 
+above have widespread usage, but there are a number of new 
+approaches being development that combine optical and electrical 
+components to move both illumination and detection to the probe.
+With such devices, it is possible to use less light power, 
+more easily image large volumes and use waveguides to achieve 
+targeted excitation \cite{Warden:2014bx,Wu:2015gk,Segev:2017en}.
 
 \subsection{Accessing deep brain regions}
-%		Challenge: scattering
-%		Muliphoton microscopy
-%		Implantable optics (GRIN lenses, prisms \cite{Andermann:2013kc}) - connectivity, scarring
-%		Tissue removal
+
+The range of optical techniques described in the previous 
+section are widely used to optically record or manipulate 
+neural activity. Yet all of these techniques are constrained 
+by the light scattering and absorption of the brain, which 
+either limits the techniques to more superficial regions or 
+requires more invasive methods to access deep brain regions.
+
+\paragraph{Multi-photon microscopy.} Two- and three-photon 
+microscopy achieve greater penetration through use of 
+wavelengths that have lower scattering coefficients in 
+tissue \cite{Wang:2017jp}. This is especially true for 
+three-photon microscopy, that is able to record 
+fluorescent indicator activity from depths exceeding 1~mm.
+
+\paragraph{Implantable optics.} To reach further than 
+is accessible with three-photon microscopy, or to image 
+from a deep brain region in a freely behaving animal, 
+researchers currently rely on implantable optics. 
+Specifically, GRIN lenses \cite{Barretto:2009hk} and 
+prisms \cite{Andermann:2013kc} are frequently used to 
+access deeper brain structures.
+
+But thanks to an existing body of literature related to 
+electrode development, implants with a cross section 
+greater than 50~\si{\micro\meter} can cause neuronal 
+damage and depth over a region up to 100~\si{\micro\meter}
+from the implant \cite{Seymour:2007dj}. The insertion 
+trauma and the motion of the brain relative to the implant 
+after insertion can both trigger tissue encapsulation, 
+disruption of oxygenation and  excitotoxic cell death
+\cite{Szarowski:2003cz,Polikov:2005cq,McConnell:2009hr,Freire:2011gl}.
+Implants that have a small cross section ($<$10~\si{\micro\meter}) 
+and that are more flexible can avoid this tissue response 
+\cite{JohnPSeymour:2006td,Harris:2011dy,Kozai:2012bp,Patel:2018cr}.
+Unfortunately, most optical implants have diameters exceeding 
+500~\si{\micro\meter} (in order to achieve a wide field of view) 
+and are rigid.
+
+As a result, GRIN lenses and other optical implants damage 
+damage or destroy the tissue in the immediate path and 
+are often encapsulated in glia due to the induced foreign 
+tissue response \cite{Lee:2016ko}. The interface will 
+collect fluorescence activity from neurons just beyond this 
+region of encapsulation. Yet the full impact of the implant 
+is often unknown. Due to dense local connectivity, tissue 
+damaged by the implant and foreign body response can impact 
+network dynamics in the imaging plane 
+\cite{Hayn:2015ew,Hayn:2017kj,GossVarley:2017kf}.
+
+\paragraph{Tissue removal.} Another approach worth mentioning, 
+but sharing many of the limitations of optical implants, is 
+removal of superficial tissue \cite{Dombeck:2010jr}. By 
+removing superficial tissue, it is possible to directly access 
+the region of interest and apply standard imaging techniques 
+(such as a head-mounted microscope or multi-photon imaging). 
+But the contribution of superficial regions and local connectivity 
+are both jepoddized or obliterated in such an approach.
 
 \section{Proposed Solution}
 %		Bidirectional optical access
 %		High channel count
 %		Longitudinal access
 %		Awake behaving access
-
-% TODO: review onward
 
 In order to translate the benefits inherent in superficial 
 imaging techniques, such as long-term stability, high-channel 
@@ -281,73 +342,52 @@ that can be implanted in brain tissue. The principle of these
 optical fibers is based on self-splaying carbon fiber microthread 
 arrays developed for electrophysiology 
 \cite{Guitchounts:2013bs,Markowitz:2015ko}. The optical fiber 
-bundles contain hundreds or thousands of multi-mode 
+bundles contain hundreds or thousands of multimode 
 optical microfibers as small as 6.8~\si{\micro\meter} in diameter, 
 displacing significantly less brain tissue and minimizing 
 contact between tissue and non-biological surfaces as 
-compared with existing optical fiber implants which are
-often 125~\si{\micro\meter} wide. As each fiber travels independently 
-and finds a path of least resistance, the fibers 
-separate and splay, expanding the potential recording area 
-while minimizing tissue damage. Each fiber maintains near total 
-internal reflection of light,
-which can be used for fluorescence recording of neural activity or optical stimulation of optogenetic probes.
+compared with existing optical fiber implants. As each 
+fiber travels independently and finds a path of least 
+resistance, the fibers separate and splay, expanding 
+the potential recording area while minimizing tissue 
+damage. Each fiber maintains near total internal reflection, 
+allowing the fiber to optically interface with genetically 
+encoded indicators and probes in the tissue surrounding the 
+fiber aperture.
 
-We have successfully used two techniques for constructing the optical microfiber bundles. Initial prototypes were
-constructed from unraveled quartz roving pulled together in a glass pipette, which was then cut and polished on 
-a rotary grinder to act as an imaging surface. Light confinement in this configuration is achieved through the 
-mismatch in the index of refraction between the fibers and surrounding tissue. The second approach relies on sourcing 
-commercial leeched fiber bundles produced as flexible endoscopes, which are composed of 8~\si{\micro\meter} glass microfibers, 
-where each fiber has a low index of refraction cladding for improved light confinement (figure~\ref{fig:i-confinement}).
-The numerical aperture of such fibers is 0.4, providing a half-angle of acceptance of 17.2$^{\circ}$ in gray matter.
-Over a length of 40~\si{\centi\meter}, the fibers attenuate incident light from a 473nm laster by 13.11dB, due to both coupling the 
-unfocused light into the microfiber and propagation loss. The NA and attenuation efficiency suggest the bundles will
-be effective for both optical stimulation and recording. Through 
-the splaying and, potentially, through staggered cutting of the individual microfibers, the implanted
-fibers will interface with cells throughout a target brain region, providing a high-channel count interface
-allowing recording from many neurons involved in a system behavior.
+The fibers are constructed by sourcing commercial leeched 
+fiber bundles produced as flexible endoscopes, which are 
+composed of thousands of 8~\si{\micro\meter} glass microfibers, 
+where each fiber has a low index of refraction cladding for 
+light confinement. By cutting the fiber bundle in half, we 
+gain access to the individual fibers, which can be directly 
+implanted into the tissue. Outside of the brain, the fibers 
+converge to a polished imaging surface where the fibers are 
+arranged in a light lattice that can be mounted under a 
+traditional fluorescence microscope objective.
 
-Outside of the brain, the fibers converge to an imaging surface where the fibers form a close-packed array that
-is polished for interfacing with standard microscope objectives. Recordings of fluorescent beads diffusing around the
-splaying fibers reveal minimal cross talk and a high signal to noise ratio.
+This approach achieves a number of the usual advantages 
+of optically interfacing with tissue, while foregoing the 
+substantial tissue impact associated with large, monolithic 
+implants such as GRIN lenses. By implanting hundreds or 
+thousands of optical microfibers, it is possible to record 
+or stimulate neurons over a large region of tissue. Given 
+that the fibers splay during insertion, a bundle can spread 
+out over 1~mm at a depth of 3~mm, sampling fluorescent 
+activity over a large 3D volume. Because 
+each fiber is flexible and has a small cross section, the 
+individual fibers will not have the same impact as a 
+larger implant, preserving more of the local connectivity 
+and network dynamics. Finally, because each fiber has 
+near total internal reflection, it will deliver excitation 
+light to and collect fluorescence from a small amount of 
+tissue near the fiber aperture.
 
-% \begin{itemize}
-% 	\item Discuss bundles
-% 	\item Preliminary histology
-% 	\item Image of bundle \& beads
-% 	\item Suggestion of full duplex recording
-% \end{itemize}
-
-\paragraph{Recording and stimulation interface.}
-
-% Interface
-%   Rotary Scope
-%   Software
-
-To realize the splaying microfiber technique in experimental conditions, we will develop
-a rotary single-photon microscope that enables recording from freely behaving animals with
-minimal constraints on motion. The bundle of optical microfibers is lightweight, flexible 
-(with a bending radius of less than 1~\si{\centi\meter} and sufficiently
-long (up to 80~\si{\centi\meter}), allowing the optical equipment to
-be located away from the animal. As a result, a high-quality and a high-sensitivity 
-CMOS sensor can be used to record fluorescent emissions from the fiber. This sensor and the 
-accompanying optics will 
-be placed on a commutator (figure~\ref{fig:a2-schematic}) which, in conjunction with the length 
-of the fiber, will allow
-the animal to move and rotate within its housing carrying only the weight of the fiber bundle. 
-Both the commutator and the microscope will be adaptations of existing
-head-mounted fluorescent techniques developed and used within the lab.
-
-The CMOS sensor will be connected to an existing suite of software developed in the lab that 
-allows automating recording. In the case of zebra finches, recording is triggered by the 
-bird's song. Video from the sensor will be immediately digitized and written to disk, and 
-can be analyzed in near-realtime, enabling behavioral- or cellular-contingent feedback. In 
-order to best work with the spatially incoherent data that will come from the splaying microfibers,
-the software may need to be adapted to handle non-contiguous regions of interest and live
-source separation based on a precalculated mixing matrix.
-
-The rotary microscope interface and accompanying software will facilitate running experiments
-using the microfiber bundles by providing a robust recording mechanism and the ability to conduct
-feedback-driven experiments that elicit complex behaviors during recording. For example, by
-providing aversive feedback to zebra finches, we will observe how the basal ganglia (area X)
-is involved in the learning of a modified (pitch- or time-shifted) song \cite{Tumer:2007bi}.
+Bundles of optical microfibers have the potential to 
+extend multichannel, bidirectional optical techniques to 
+deeper brain regions without having to remove or obliterate 
+the adjacent brain regions. In the next chapter, we 
+present a more detailed description of the fibers and 
+review histological evidence showing the distribution 
+of fibers in tissue and the presence of neurons in close 
+proximity to the fiber tips.
