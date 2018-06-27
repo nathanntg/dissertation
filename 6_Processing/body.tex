@@ -17,7 +17,6 @@
 
 \subsection{Chronic fiber interface}
 
-% TODO: revise paragraph
 To use the bundles of optical microfibers to interface 
 with awake behaving animals, we have built and piloted 
 a configuration where the animal is housed in an enclosure 
@@ -27,31 +26,56 @@ the animal. The bundle is secured to the animal using
 anchor points around the craniotomy. To avoid physical 
 stress on the optical fibers, the bundle is reinforced 
 with a strip of polyimide (DuPont Kapton, 0.005'' thick),
-prepared as shown in \fref{fig:strip}.
+prepared as shown in \fref{fig:strip}. The strip is 
+similarly runs from the skull implant points to the 
+fluorescence microscope above the enclosure.
 
 \begin{figure}
 \includegraphics[width=\textwidth]{fig1-strip.eps}
 \caption[Polyimide to reinforce fiber bundle]{\textbf{A diagram
 of a prepared polyimide strip to reinforce a chronic fiber 
-bundle implant.} 
-}
-\label{fig:software}
+bundle implant.} A strip of polyimide is used to absorb physical 
+stresses, protecting the bundle of fibers. The fiber bundle is 
+threaded through the small holes and the bottom hole (right) is 
+used to anchor the polyimide strip to the skull.}
+\label{fig:strip}
 \end{figure}
 
+The polyimide strip is cut slightly shorter than the fiber 
+bundle, so that when the animal moves or twist, the force 
+will be primarily exerted on the strip rather than the bundle.
+To secure the fiber bundle to the polyimide strip, we 
+punched small holes in the strip, through which the 
+fiber bundle was threaded. This ensured that the slack 
+in the fiber bundle did not dangle or interfere with 
+the animals behavior.
 
-In order to deploy the fiber bundles in awake behaving experimental 
-paradigms, we envision an implementation of the bundle interface where
- the animal is housed in an enclosure below a traditional fluorescence
- microscope with the ensheathed bundle running from the microscope to 
-the implant point (see figure x). Depending on the duration of the 
-experiment, the fiber can be fixed below the microscope objective or 
-placed on a low-friction passive commutator (e.g., using precision 
-ball bearings) that allows the fiber bundle to rotate as the animal 
-moves. Given the flexibility of the fiber bundle, it may be necessary 
-to add a second material that helps translate the rotational torque to
- the commutator. During post-processing of the acquired recordings, 
-the rotation of the fiber bundle can be corrected through 
-registration.
+Depending on the duration of the recording session, the 
+fiber can either be fixed below the fluorescent microscope 
+or can be mounted in a low-friction passive commutator,
+constructed from precision ball bearings (\fref{fig:commutator}), that allows 
+the fiber bundle to rotate as the animal moves. Given the 
+flexibility of the fibers, the polyimide reinforcement 
+strip is beneficial here to translate the rotational 
+torque up to the commutator.
+
+\begin{figure}
+\includegraphics[width=\textwidth]{fig2-commutator.jpg}
+\caption[Commutator for awake behaving recording]{\textbf{Commutator
+build with low-friction, precision ball bearings allows fiber to 
+rotate.} A passive commutator constructed with precision ball 
+bearings holds the ferrule and polished imaging surface below 
+a microscope objective. As the animal moves about the enclosure,
+the fiber can freely rotate, while remaining level in the focal 
+plane of the microscope.}
+\label{fig:commutator}
+\end{figure}
+
+In situations requiring longer acquisition exposure, the 
+rotation of the fiber may be problematic. We tested a 
+further variation that used a servo to apply a rubber pad 
+to the passive commutator during recording, temporarily 
+preventing rotation.
 
 \subsection{Acquisition hardware}
 
@@ -164,19 +188,34 @@ second channel. The ground truth signal triggers oscilloscope
 acquisition, again averaging over 128 trials to build a distribution 
 of timing performance.
 
-\subsection{Synchronized acquisition}
-
-% TODO: show synchronized acquisition circuit
-
 \subsection{Analysis pipeline}
 
 % TODO: describe node based analysis pipeline
 
 \section{Results}
 
-% TODO: write some results
-% commutator
-% software latency
+The chronic fiber interface coupled and associated video 
+acquisition and analysis software were used to record 
+from five zebra finches for 7--23 days each (mean: 
+17~days). The recording results are not 
+presented here, but the sessions provided an opportunity to 
+evaluate and revise the fiber interface for longitudinal 
+awake behaving recordings.
+
+\subsection{Chronic fiber interface}
+
+The implanted fibers remained well secured over the 
+course of the recording, and the setup provided the 
+necessary freedom of motion to allow the birds to 
+sing. For all five animals, we recorded fluorescence 
+via the fiber and synchronized audio for hundreds 
+of song renditions per day.
+
+After 23 days implanted in an awake behaving animal,
+we remeasured the optical attenuation. The optical 
+attenuation of the used fibers was measured to be 
+6.54~dB (compared with 3.78~dB pre-recording, as 
+measured in \sref{sec:methods-fibers}).
 
 \subsection{Analysis performance}
 
@@ -184,13 +223,13 @@ To evaluate the near-real-time analysis and feedback, we recorded
 signals that provide a reference signal that represents the 
 ground truth. 
 
-% TODO: ideally remeasure and generate new figure
+% TODO: potentially remeasure and generate new figure
 Region of interest (ROI) video analysis was evaluated by measuring the
 time from LED onset to software feedback. The average time to trigger 
-a feedback stimulus is 23.9 $\pm$ 7.9~ms (95\% confidence interval), 
+a feedback stimulus is 23.9 $\pm$ 3.9~ms (std. dev.), 
 including frame exposure, digitization, transmission, data acquisition 
 and software processing. This latency reflects the intrinsic 
-limitations of the 33~ms exposure time (which accounts for 16.5~ms of 
+limitations of a 33~ms exposure time (which accounts for 16.5~ms of 
 the delay) as well as the time spent capturing and decoding the video, 
 and communicating an output TTL via the microcontroller. 
 \Fref{fig:video-latency} depicts video controller latency.
@@ -198,42 +237,65 @@ and communicating an output TTL via the microcontroller.
 \begin{figure}
 \includegraphics[width=\textwidth]{fig3-video-latency.eps}
 \caption[Latency for video processing]{\textbf{Video analysis 
-produces feedback in 24~ms, including exposure time.} 
-% TODO: finish caption
-
- C. Example of feedback contingent on ROI tracking. Black: voltage driving an LED light flash that is recorded in the field of the CMOS; blue: the cumulative probability density function (CDF) of a brief TTL pulse triggered by the software in response to the LED flash processed through the entire acquisition system. Event detection was based on ROI analysis on a Mac Mini computer. Latency of the full loop from camera to Arduino based TTL output is approximately 23.9 ms ± 7.9 ms (95\% confidence interval), with the jitter comparable to the frame rate of the camera. In this test, the LED was not synchronized to the onset of the frame, as would be the case for spontaneous video recording of neural activity. This represents the experimentally relevant performance of the system, intrinsically limited by the 33 ms frame rate of the camera. D. Of the total latency, image processing to extract fluorescence from ten cell-sized regions of interest contributes an average of only 0.17 ms; much of the ROI feedback latency is a reflection of the frame rate and acquisition time.
-
-}
+produces feedback in 24~ms, including exposure time.} To measure 
+the latency of the video analysis functionality in the 
+acquisition software, an LED was flashed in the field of view,
+while timing the delay until the output TTL indicating detection. 
+(a) Black: voltage driving LED light flash; blue: cumulative density 
+function (CDF) of TTL output. The latency from LED activation to 
+output TTL is 23.9 $\pm$ 3.9~ms (std. dev). This is consistent
+with the 33~ms exposure time. (b) Of the total latency, the image 
+processing to extract mean intensity from ten cell-sized regions 
+of interest contributes an average of only 0.17~ms; much of the 
+ROI feedback latency is a reflection of the frame rate and 
+acquisition time.}
 \label{fig:video-latency}
 \end{figure}
 
-
-Figure 2C depicts time between LED onset and feedback in our software 
-test bed. The average time to trigger a feedback stimulus is 23.9 
-$\pm$ 7.9~ms (95\% confidence interval), including frame exposure, 
-digitization, transmission, data acquisition and software processing. 
-This latency reflects the intrinsic limitations of the 30 FPS (33~ms) 
-frame rate as well as time spent capturing and decoding video, and 
-communicating an output TTL with the Arduino controller through the 
-serial port. Data acquisition, region of interest processing, and 
-feedback triggering all occur within an average of 1.7~ms after frame 
+Of the total ROI latency, we can break this down in terms of 
+specific steps in the analysis pipeline. Data acquisition, 
+region of interest processing, and feedback triggering all 
+occur within an average of 1.7~ms after frame 
 capture (95\% confidence: $<$11~ms). This variability stems primarily 
 from video encoding and storage, where the codec and write buffering 
 necessitate increased processing time for a subset of frames. An 
-additional  source of variability in processing time, which has a 
-smaller impact and is shown Figure 2D, relates to the number and 
+additional  source of variability is processing time, which has a 
+smaller impact and is shown in \fref{fig:video-latency}b, relates 
+to the number and 
 complexity of the defined regions of interest. As the number and size 
 of the regions of interest increases, the processing time increases. 
 In tests involving ten cell-sized regions of interest, the average 
-processing time was 0.17~ms with a range of 0.11--0.22~ms (95\% 
-confidence interval).
+processing time was 0.17 $\pm$ 0.03~ms (std. dev.).
+
+For audio processing, a similar evaluation can be performed to 
+measure average latency for a detection task. Specifically, we 
+used a version of the acquisition software extended with a 
+trained neural network to identify birdsong syllables 
+\cite{Pearre:2017cs}. The detection software was configured to 
+process 1.5~ms chunks of audio, sending a rolling window of 
+spectral features through the neural network to detect the 
+target syllable. Using a recording that includes ground 
+truth data, the latency of detection events could be compared 
+with actual syllable presentation. \Fref{fig:audio-latency} 
+shows the latency for two different TTL output modalities: 
+upon detection, the acquisition software could either 
+generate a TTL pulse via the connected microcontroller or 
+generate a signal on the audio line out (useful for playing 
+aversive white noise feedback). Via the audio line out, the 
+average latency is 4.2 $\pm$ 2.1~ms. Via the microcontroller,
+the average latency is 0.0 $\pm$ 1.8~ms. 
 
 \begin{figure}
 \includegraphics[width=\textwidth]{fig4-audio-latency.eps}
 \caption[Latency for audio processing]{\textbf{Audio analysis 
-produces feedback output in under 5~ms.} 
-% TODO: finish caption
-}
+produces feedback output in under 5~ms.} The acquisition 
+software extended with a neural network based syllable detection 
+tool, evaluated on annotated data, allowing evaluation of 
+latency between actual syllable presentation and the detection 
+TTL pulse. If the TTL pulse was delivered via the attached 
+microcontroller, average latency was 0.0 $\pm$ 1.8~ms; if 
+delivered via the audio line out, the latency increased to 
+4.2 $\pm$ 2.1~ms.}
 \label{fig:audio-latency}
 \end{figure}
 
