@@ -15,13 +15,12 @@
 
 % TODO: introduce methods section
 
-
 Animal care and experimental procedures were 
 approved by the Institutional Animal Care and Use Committee (IACUC) 
 of Boston University (protocols 14-028 and 14-029). Fibers were 
-implanted in nine animals. Of those, we recorded from seven 
-chronically via the fiber interface described in the next section; 
-two were excluded due to issues in early design iterations, 
+implanted in nine zebra finches. Of those, we chronically recorded 
+from seven birds via the fiber interface described in the next section; 
+two were excluded due to issues with early design iterations, 
 where the birds risked getting tangled in the fiber bundle.
 
 \subsection{Chronic fiber interface}
@@ -316,35 +315,66 @@ attachable recording fiber, we have developed a recording
 configuration that allows chronic recordings in awake 
 behaving animals. Based on initial 
 
-Given the challenges of connectorizing or aligning fiber 
+Given the challenges of cnonnectorizing or aligning fiber 
 bundle ferrules, each with a lattice of thousands of individual 
 fibers, we have developed and described an approach to 
-perform chronic recordings in awake behaving animals. 
+perform chronic recordings in awake behaving animals by 
+placing the enclosure below a fluorescence microscope. 
+Custom software is then used to either manually or 
+automatically trigger acquisition during a behavioral 
+paradigm, recording video of fluorescence activity and, 
+when applicable, synchronized analog data (such as audio).
+The software has the ability to do low latency processing 
+of both video and analog signals, which can be used to 
+control acquisition or provide feedback to the animal.
 
-% TODO: write a discussion
+Using this setup, we were able to chronically monitor 
+seven birds and trigger acquisition based off singing. 
+Assessment of the fibers after three weeks of acquisition 
+show an increase in attenuation, suggesting that even 
+with the polyimide reinforcement strip, either the implant 
+or recording process results in wear and tear on the 
+bundles of optical microfibers, increasing attenuation. 
+It may be valuable to collect more example to track 
+the decline in attenuation, and potentially improve 
+the chronic interface configuration to better protect 
+the fibers.
 
- In this paradigm, the camera can be used as a brain machine interface
- (BMI) in which songbirds control sounds directly through the measured
- calcium signals in the brain (Clancy et al. 2014). Other applications
- of the software could include closed-loop stimulation experiments 
-that seek to electrically or optically disrupt patterns of activity in
- real-time.
+With software capable of near-real-time analysis of
+fluorescence activity, the fibers can be used as a 
+brain machine interface (BMI) in which an animal controls 
+an external device through the measured calcium fluorescence 
+measured via the implanted fibers; for example, this could 
+be used to allow songbirds direct control over sound 
+generation \cite{Clancy:2014gw}. Other applications 
+of the software could include closed-loop stimulation experiments 
+that seek to optically disrupt specific patterns of 
+activity when detected.
 
-In our tests, the latency of triggering off fluorescence activity was 
-limited by the exposure of the microscope, about 23.9 $\pm$ 7.9~ms 
-Figure 2C. For many experiments, this response latency is acceptable. 
-In the songbird, for example, the sensory-motor latency from pre-motor
- neuron activity in HVC to auditory sensory consequences processed in 
-the basal ganglia is a minimum of 32--50~ms \cite{Andalman:2009bh}. 
-Based on these estimates and published accounts of conditional 
-feedback experiments in songbirds, the time-delay should provide a 
-learnable brain machine interface 
+In our tests, the latency of triggering off 
+fluorescence activity was limited by the sensor 
+of the microscope, about 23.9 $\pm$ 3.9~ms 
+(\fref{fig:video-latency}). For many experiments, 
+this response latency is acceptable. In the songbird, 
+for example, the sensory-motor latency from pre-motor 
+neural activity in HVC to sensory evaluation of 
+the auditory signal processed in the basal ganglia 
+is a minimum of 32--50~ms \cite{Andalman:2009bh}. 
+Based on these estimates and published accounts 
+of conditional feedback experiments in songbirds, 
+the time-delay should provide a learnable brain 
+machine interface 
 \cite{Olveczky:2005bp,Tumer:2007bi,Sakata:2008cm,Sober:2009ci}. 
-However it remains to be seen whether the timing jitter in the current
- system is acceptable for brain machine interface experiments in a 
-system as precise as the songbird. For the zebra finch, relative 
-jitter between premotor commands and auditory feedback is just a few 
-milliseconds. For some experiments lower latency and lower variability
- may be desirable, and with the introduction of faster frame rate 
-cameras and deterministic real-time operating systems, this latency 
-and latency variability will decrease.
+However it remains to be seen whether the timing 
+jitter in the current configuration is acceptable 
+for brain machine interface experiments in a 
+system as precise as the songbird. For the zebra 
+finch, relative jitter between premotor commands 
+and auditory feedback is just a few milliseconds. 
+For some experiments lower latency and lower 
+variability may be desirable, which can be achieved 
+through a shorter exposure (higher frame rate). 
+To further decrease jitter, the acquisition process 
+can potentially be moved to a deterministic 
+real-time operating system.
+
