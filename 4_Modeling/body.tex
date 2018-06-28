@@ -63,6 +63,9 @@ Having separated the independent signals, we can then apply the waveform filter 
 
 As there are many more neurons than fibers, separating all neural activity is an underdetermined problem. This technique is limited to extracting as many neural traces as there are fibers.
 
+% TODO: potentially add open source link
+%\footnote{The software is open source and accessible at \url{https://github.com/...}}
+
 \paragraph{Evaluating source separation.} The evaluation of the source separation must consider both that the output of the source separation is a small subset of the underlying neural signals, and the underdetermined nature of the blind source separation. To this end, we calculate the correlation coefficients of each separated signal ($\hat{\vec{x}}_i$) with each true, simulated fluorescence trace ($\vec{x}_i$). The quality of the separation is then evaluated based on how many of the separated signals have a sufficiently high correlation with a true trace. In the results section, we evaluate threshold choices and how they impact the number of extracted ``true'' signals.
 
 To understand the source separation in the context of an experimental question, we further evaluate the separated signals on a spike detection task. Using the approach of detecting threshold crossings as a proxy for neural spikes, we can compare threshold crossing events in the separated signal with those in the matched underlying neural trace. This forms a binary classification task that can be measured in terms of a receiver operating characteristic plot and the accompanying area under the curve \cite{Hanley:te}. The area under the curve (AUC) represents how well threshold crossings on the separated signal can be used to approximate threshold crossings on the true neural fluorescence; an area under the curve of 0.5 indicates poor performance (unable to separate), while a value of 1 indicates perfect performance.

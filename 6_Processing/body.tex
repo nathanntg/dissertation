@@ -7,13 +7,54 @@
 % must have a trailing slash
 \graphicspath{{6_Processing/Figures/}}
 
+% TODO: read through this section
+
 \section{Introduction}
 
-% TODO: introduction
+Acute recordings from bundles of optical microfibers 
+(\cref{chapter:recording}) show the potential of the 
+interface for extending optical access to deep brain 
+regions. The splaying fibers deliver excitation light,
+and collect fluorescent emissions during a cortical 
+spreading depolarization, enabling visualizing the 
+associated calcium dynamics and propagation of the 
+depolarization. Yet the potential of the interface is 
+to record fluorescence in awake, behaving animals.
+
+In order to achieve such recordings, a new optical 
+configuration is required that will allow recording 
+animals in a complex behavioral task. This necessitates 
+a way to store and arrange the fiber such that it is 
+protected from physical damage, but allows the animal 
+to freely move about their enclosure.
+
+Specifically, we intend to use the fibers to record 
+fluorescence activity in singing zebra finches. 
+Their ability to move about their enclosure freely 
+is crucial; when constrained, the animals will rarely 
+sing. To this end, we have designed a recording interface 
+that holds a reinforced fiber bundle in a passive 
+commutator above the bird's enclosure. As the bird moves 
+around its cage, the fiber can rotate below the objective 
+of a traditional fluorescence microscope. 
+
+Custom acquisition software controls video and analog 
+data acquisition; in the case of the zebra finches, we 
+use the analog data channels to record synchronized audio, 
+which is both used to trigger acquisition and in subsequent 
+analysis. The software is also capable of near-real-time 
+analysis of acquired video frames, extracting fiber 
+intensity information, which can be used to generate 
+behavioral feedback or brain machine interface 
+functionality.
+
+Based on the design configuration used to record from 
+seven zebra finches, each for a minimum of a week, we 
+describe a hardware and software configuration that 
+enables longitudinally recording fluorescent activity 
+from an awake behaving animal.
 
 \section{Methods}
-
-% TODO: introduce methods section
 
 Animal care and experimental procedures were 
 approved by the Institutional Animal Care and Use Committee (IACUC) 
@@ -30,11 +71,11 @@ with awake behaving animals, we have built and piloted
 a configuration where the animal is housed in an enclosure 
 below a traditional fluorescence microscope with the 
 ensheathed bundle running from the microscope to 
-the animal. The bundle is secured to the animal using 
+the animal (\fref{fig:bundle}). The bundle is secured to the animal using 
 anchor points around the craniotomy. To avoid physical 
 stress on the optical fibers, the bundle is reinforced 
 with a strip of polyimide (DuPont Kapton, 0.005'' thick),
-prepared as shown in \fref{fig:strip}. The strip is 
+prepared as shown in \fref{fig:strip}. The strip 
 similarly runs from the skull implant points to the 
 fluorescence microscope above the enclosure.
 
@@ -53,7 +94,7 @@ The polyimide strip is cut slightly shorter than the fiber
 bundle, so that when the animal moves or twist, the force 
 will be primarily exerted on the strip rather than the bundle.
 To secure the fiber bundle to the polyimide strip, we 
-punched small holes in the strip, through which the 
+punched 1~mm holes in the strip, through which the 
 fiber bundle was threaded. This ensured that the slack 
 in the fiber bundle did not dangle or interfere with 
 the animals behavior.
@@ -79,6 +120,10 @@ plane of the microscope.}
 \label{fig:commutator}
 \end{figure}
 
+To correct for the rotation of the fiber, a rotational 
+motion correction is applied to the recorded video 
+(described in \sref{sec:pipeline}).
+
 In situations requiring longer acquisition exposure, the 
 rotation of the fiber may be problematic. We tested a 
 further variation that used a servo to apply a rubber pad 
@@ -87,20 +132,47 @@ preventing rotation.
 
 \subsection{Acquisition hardware}
 
-% TODO: describe acquisition hardware
+The ferrule and polished imaging surface were held 
+using a passive commutator (\fref{fig:commutator}) 
+below a traditional fluorescent microscope (Olympus, 
+20$\times$ objective) with a broadband white LED 
+(Thorlabs SOLIS-3C) set at 100\% brightness and 
+a GFP filter cube (Semrock BrightLine GFP-4050B, 
+466/40 excitation, 525/50 emission, 495 dichroic). 
+Excitation power from the objective was measured 
+at 9.16~mW; given the core size and count, this 
+approximately corresponds with coupling 
+0.3~\si{\micro\watt} into each 
+fiber. Fluorescence activity was recorded either 
+with a USB compatible CMOS camera (3rd eye 
+electronics, MC900 paired with DM420 frame capture 
+device) configured for an exposure of 33~ms or with an 
+sCMOS camera (Hamamatsu ORCA-Flash4.0 v2) configured 
+for 2$\times$2 binning and an exposure of 50~ms, 
+resulting in a 20 frames per second recording of 
+1024$\times$1024 16 bit pixels.
 
-\subsection{Acquisition software}
-
-% TODO: describe two software acquisition approaches
+When recording via a standard USB CMOS, the custom 
+acquisition software described in the next section 
+was used to control the camera and acquire video. 
+When using the ORCA-Flash sCMOS, the custom 
+acquisition software triggered acquisition and 
+recorded frame synchronization information, while 
+the raw video stream was acquired and written to 
+disk by HCImage (Hamamatsu). This allowed splitting  
+the data-intensive (40 megabytes per second) video 
+acquisition onto a separate computer from the 
+analog signal acquisition and analysis.
 
 \subsection{Near-real-time software}
 
 To manage and trigger acquisition, and to do near-real-time signal
 processing, we created custom image acquisition software that runs
-on the macOS operating system (\fref{fig:software}). Leveraging the 
-native AVFoundation
-framework, the software is capable of communicating with a wide 
-range of USB video 
+on the macOS operating system (\fref{fig:software}).\footnote{The 
+software is open source and accessible at 
+\url{https://github.com/gardner-lab/video-capture}}
+Leveraging the native AVFoundation framework, the software is 
+capable of communicating with a wide range of USB video 
 acquisition hardware, including both analog-to-digital frame 
 grabbers and cameras. The software can capture video or video 
 synchronized with multi-channel analog data (including 
@@ -197,8 +269,42 @@ acquisition, again averaging over 128 trials to build a distribution
 of timing performance.
 
 \subsection{Analysis pipeline}
+\label{sec:pipeline}
 
-% TODO: describe node based analysis pipeline
+% TODO: potentially add open source link
+%\footnote{The software is open source and accessible at \url{https://github.com/...}}
+
+Given the large file size in chronic recordings (200~GB), 
+we designed a custom set of tools to aid in file 
+processing and analysis. We created a Python script to 
+convert the Hamamatsu CXD file format to raw binary files, 
+allowing direct frame indexing. Next, a set of custom 
+MATLAB classes allowed composing a node based processing 
+script, which would allow each frame to be processed in 
+isolation, minimizing the amount of memory need to work 
+with the videos.
+
+Our standard pipeline involved iterating over video frames 
+twice. During the first pass, raw video frames were 
+passed into a Scale-Invariant Feature Transform (SIFT) 
+\cite{vedaldi08vlfeat,lowe1999object,Lowe:2004kp} 
+motion correction algorithm, capable of correcting 
+the rotation of the fiber bundle associated with the 
+passive commutator. The transformation matrices 
+associated with the motion correction were cached 
+for the second pass, and the motion corrected frames 
+were passed to statistical analysis nodes. The analysis 
+node accumulated statistics on each pixel, including 
+range, mean and percentile intensities. These statistics 
+enable identifying high variability fibers and defining 
+regions of interest for subsequent analysis.
+
+During the second pass, the algorithm again applies the 
+motion correction transform to each frame, and extracts 
+the mean pixel intensity associated with each region of 
+interest. Additional nodes in the software pipeline allow 
+optionally applying smoothing, downsampling or background 
+subtraction, depending on the desired output.
 
 \section{Results}
 
