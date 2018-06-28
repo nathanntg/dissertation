@@ -7,9 +7,88 @@
 % must have a trailing slash
 \graphicspath{{7_Conclusion/Figures/}}
 
+% TODO: read through this section
+
 \section{Splaying optical microfibers as an interface}
 
-% TODO: write conclusions
+In this thesis, we have introduced a novel deep brain 
+optical interface. Rather than using a single monolithic 
+implant, the presented bundles of optical microfibers 
+have a smaller cross section and greater flexibility. 
+During insertion, each fiber moves independently, 
+splaying throughout the tissue. The other end of the 
+fibers are arrayed in a regular lattice on a polished 
+imaging surface that can be readily mounted under a 
+traditional fluorescent microscope. As each fiber has a 
+core and cladding, achieving near total internal 
+reflection, the fiber carries light to the aperture, 
+where it can optically interface with a small region 
+of tissue.
+
+In \cref{chapter:histology}, we review the fiber 
+configuration, surgery and histology. Results from 
+implanted zebra finches show that at a depth of around 
+3~mm, a bundle of a hundreds or thousands of fibers 
+spreads over 1~mm in diameter; each fiber samples 
+fluorescent activity from small regions of tissue 
+distributed across a larger 3D volume. The 
+immunohistochemistry finds neurons in close proximity 
+to the fiber tips in animals chronically implanted, 
+showing less tissue impact than comparable results 
+from larger diameter, rigid electrode implants. 
+These results are a promising indication of the 
+preservation of local connectivity and network 
+dynamics.
+
+Based on the distribution of fibers seen in the 
+histology, we model in the interface properties 
+in \cref{chapter:modeling}. As the number of fibers 
+increases and, hence, the density of fibers, a 
+bundle will deliver more uniform excitation power 
+to the tissue and neighboring fibers will have 
+greater overlap in the collected signals. Under 
+such conditions, it becomes possible to apply 
+blind source separation techniques to extract 
+individual neural contributions. By combining 
+knowledge of the underlying fluorescent indicator 
+waveform and mixing process, we use a form of 
+non-negative independent component analysis to 
+unmix simulated modeled neural activity.
+
+In \cref{chapter:recording}, we present initial 
+in vivo recording data from mice, including fluorescence 
+collected due to both intravenously injected agents 
+and induced cortical spreading depolarizations. 
+In addition, we show fluorescent activity time 
+locked to sensory stimulus. These signals show 
+potential for the fiber bundles as a recording 
+interface, but also have a low contrast to 
+background ratio and help identify further areas 
+for improvement in the methodology.
+
+Finally, in \cref{chapter:processing}, we 
+present a recording configuration from chronically 
+interfacing with animals via the bundles of optical 
+microfibers, including a commutator and acquisition 
+platform capable of synchronized video and analog 
+data capture. Near-real-time analysis software 
+allows processing acquired signal, and can be 
+used to present feedback or run brain machine 
+interface experiments.
+
+Overall, we believe that the bundles of optical 
+microfibers achieves a unique set of tradeoffs 
+for optically interfacing with deep brain regions. 
+Smaller, flexible optical microfibers preserve 
+more of the connectivity and dynamics in adjacent 
+brain regions, while extending optical access in a 
+way that enables freely behaving experimental 
+paradigms. For our work in zebra finches, this 
+allows recording from birds without constraining 
+them in a way that discourages or prevents singing; 
+yet we anticipate that these same benefits will 
+translate to additional species and systems 
+neuroscience inquiries.
 
 \section{Future work}
 
@@ -49,6 +128,10 @@ to understand how they impact signal quality.
 With further refinement, the technique can eventually 
 be applied to fundamental systems neuroscience 
 questions in deep brain regions.
+
+\subsection{Controlling implant and splay}
+
+% TODO: write me
 
 \subsection{Stimulation and structured illumination}
 
