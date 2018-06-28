@@ -13,17 +13,17 @@
 
 Acute recordings from bundles of optical microfibers 
 (\cref{chapter:recording}) show the potential of the 
-interface for extending optical access to deep brain 
+interface to extend optical access to deep brain 
 regions. The splaying fibers deliver excitation light,
 and collect fluorescent emissions during a cortical 
 spreading depolarization, enabling visualizing the 
 associated calcium dynamics and propagation of the 
-depolarization. Yet the potential of the interface is 
+depolarization. Yet the real value of the interface is 
 to record fluorescence in awake, behaving animals.
 
 In order to achieve such recordings, a new optical 
 configuration is required that will allow recording 
-animals in a complex behavioral task. This necessitates 
+animals during a complex behavioral task. This necessitates 
 a way to store and arrange the fiber such that it is 
 protected from physical damage, but allows the animal 
 to freely move about their enclosure.
@@ -41,7 +41,7 @@ of a traditional fluorescence microscope.
 Custom acquisition software controls video and analog 
 data acquisition; in the case of the zebra finches, we 
 use the analog data channels to record synchronized audio, 
-which is both used to trigger acquisition and in subsequent 
+which is both used for triggering acquisition and for subsequent 
 analysis. The software is also capable of near-real-time 
 analysis of acquired video frames, extracting fiber 
 intensity information, which can be used to generate 
@@ -62,7 +62,8 @@ of Boston University (protocols 14-028 and 14-029). Fibers were
 implanted in nine zebra finches. Of those, we chronically recorded 
 from seven birds via the fiber interface described in the next section; 
 two were excluded due to issues with early design iterations, 
-where the birds risked getting tangled in the fiber bundle.
+where the birds risked getting tangled in the fiber bundle and hence 
+were not connected to the microscope.
 
 \subsection{Chronic fiber interface}
 
@@ -94,10 +95,10 @@ The polyimide strip is cut slightly shorter than the fiber
 bundle, so that when the animal moves or twist, the force 
 will be primarily exerted on the strip rather than the bundle.
 To secure the fiber bundle to the polyimide strip, we 
-punched 1~mm holes in the strip, through which the 
+punched 1.5~mm holes in the strip, through which the 
 fiber bundle was threaded. This ensured that the slack 
 in the fiber bundle did not dangle or interfere with 
-the animals behavior.
+the animal's behavior.
 
 Depending on the duration of the recording session, the 
 fiber can either be fixed below the fluorescent microscope 
@@ -111,7 +112,7 @@ torque up to the commutator.
 \begin{figure}
 \includegraphics[width=\textwidth]{fig2-commutator.jpg}
 \caption[Commutator for awake behaving recording]{\textbf{Commutator
-build with low-friction, precision ball bearings allows fiber to 
+built with low-friction, precision ball bearings allows fiber to 
 rotate.} A passive commutator constructed with precision ball 
 bearings holds the ferrule and polished imaging surface below 
 a microscope objective. As the animal moves about the enclosure,
@@ -120,11 +121,11 @@ plane of the microscope.}
 \label{fig:commutator}
 \end{figure}
 
-To correct for the rotation of the fiber, a rotational 
+To correct for the rotation of the fiber, rotational 
 motion correction is applied to the recorded video 
 (described in \sref{sec:pipeline}).
 
-In situations requiring longer acquisition exposure, the 
+In situations requiring longer exposure times, the 
 rotation of the fiber may be problematic. We tested a 
 further variation that used a servo to apply a rubber pad 
 to the passive commutator during recording, temporarily 
@@ -141,12 +142,14 @@ a GFP filter cube (Semrock BrightLine GFP-4050B,
 466/40 excitation, 525/50 emission, 495 dichroic). 
 Excitation power from the objective was measured 
 at 9.16~mW; given the core size and count, this 
-approximately corresponds with coupling 
+corresponds with coupling approximately 
 0.3~\si{\micro\watt} into each 
 fiber. Fluorescence activity was recorded either 
 with a USB compatible CMOS camera (3rd eye 
 electronics, MC900 paired with DM420 frame capture 
-device) configured for an exposure of 33~ms or with an 
+device) configured for an exposure of 33~ms resulting 
+in 30 frames per second recording of 640$\times$480 
+8 bit pixels or with an 
 sCMOS camera (Hamamatsu ORCA-Flash4.0 v2) configured 
 for 2$\times$2 binning and an exposure of 50~ms, 
 resulting in a 20 frames per second recording of 
@@ -159,10 +162,12 @@ When using the ORCA-Flash sCMOS, the custom
 acquisition software triggered acquisition and 
 recorded frame synchronization information, while 
 the raw video stream was acquired and written to 
-disk by HCImage (Hamamatsu). This allowed splitting  
-the data-intensive (40 megabytes per second) video 
-acquisition onto a separate computer from the 
+disk by HCImage (Hamamatsu) on a separate computer. 
+This allowed isolating the data-intensive (40 
+megabytes per second) video acquisition from the 
 analog signal acquisition and analysis.
+
+% TODO: continue here
 
 \subsection{Near-real-time software}
 
