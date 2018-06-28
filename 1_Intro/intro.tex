@@ -5,17 +5,16 @@
 
 % TODO: read through this section
 
-Optical techniques have become a powerful tool in 
-the process of observing and manipulating 
-neural behavior at the systems level when combined 
-with genetic probes that enable reading and writing 
-neural activity at the action potential level 
-\cite{Emiliani:2015jl}, as they provide a stable 
-interface for interacting with cells over a large 
-field of view. Novel genetic probes, such as voltage 
+Optical techniques have been a pivotal tool in the 
+process of observing and manipulating neural activity, 
+achieving a stable interface for interacting with cells 
+over a large field of view, thanks in large part to the 
+genetic probes that enable resolving individual 
+neural contributions \cite{Emiliani:2015jl}. 
+Novel genetic probes, such as voltage 
 indicators, are only broadening the questions that can 
 be answered via optical techniques by achieving 
-faster time resolution and revealing subthreshold 
+greater temporal resolution and revealing subthreshold 
 activity \cite{Gong:2015is}.
 
 Despite these strengths, optical techniques are severely 
@@ -48,7 +47,7 @@ deep brain regions. The thesis is organized as follows:
 first, in \cref{chapter:intro}, we briefly review 
 existing optical methods and associated tradeoffs, 
 framing the role of the splaying optical microfibers in
-there larger methodological landscape. Second, in 
+the larger methodological landscape. Second, in 
 \cref{chapter:histology}, we describe the implant in 
 detail and histologically evaluate the implant, 
 assessing both the splaying properties of the bundles
@@ -58,22 +57,22 @@ the individual fibers and the interface properties of
 the bundles in \cref{chapter:modeling}. In 
 \cref{chapter:recording}, we describe initial in vivo
 applications of the interface and show fluorescence 
-data recorded through the fibers, identifying. Finally, 
-in \cref{chapter:processing}, we describe how peripheral 
-developments (both hardware and software) that will enable 
-application of the technique in longitudinal experimental 
-work.
+data recorded through the fibers. Finally, in
+\cref{chapter:processing}, we describe peripheral 
+developments (both hardware and software) that enable 
+application of the technique in longitudinal 
+experimental work.
 
 \section{Background}
 
 \subsection{Optical techniques}
 
-Thanks to advantages inherent to optical techniques for 
+Due to advantages inherent to optical techniques for 
 recording and manipulating neural activity, these techniques 
 have become indispensable to advancing systems neuroscience. 
-Specifically, optical techniques allow sensing and perturbing 
+Specifically, optical methods allow sensing and perturbing 
 neural activity at a cellular spatial resolution and, due
-to new indicators, at a sub action potential temporal 
+to new indicators, at a sub-action potential temporal 
 resolution. In addition, optical techniques can be deployed 
 in long-term experiments to track cellular dynamics over time 
 in awake behaving animals, allowing directly probing the 
@@ -92,15 +91,15 @@ alter the efficiency of the fluorescent protein and,
 as a result, increase its fluorescence
 \cite{Nakai:2001fy,Barnett:2017kn}. By illuminating cells expressing such a
 probe with the excitation wavelength and measuring the 
-fluoresced emissions, it is possible to sense changes in
-intracellular calcium and, hence, the calcium mediated 
+fluorescent emissions, it is possible to sense changes in
+intracellular calcium and, hence, the calcium-mediated 
 depolarization associated with action potentials. Subsequent 
 iterations on the protein have increased its efficiency, 
 speed and brightness \cite{Chen:2013fc}.
 
 The capacity to measure intracellular calcium enables 
 inquiries into a range of signaling and encoding questions, 
-but also is inherently limited to a suprathreshold cellular 
+but also is inherently limited to suprathreshold cellular 
 dynamics. New probes are being developed to sense other 
 dimensions of cellular activity, including pH indicators, 
 neurotransmitter indicators and voltage indicators 
@@ -115,11 +114,11 @@ localized and much brighter to enable high frame rate
 acquisition and detection.
 
 In addition to sensing other cellular dynamics, new fluorophores  
-are being developed and deployed that leverage the inherent 
+are being developed and deployed that leverage the  
 potential to multiplex signals across wavelengths. For example,
 calcium and voltage indicators are being developed that use 
 red or near-infrared fluorophores 
-\cite{Tischbirek:2015fi,Dana:2016hx}. New fluorophores offer 
+\cite{Tischbirek:2015fi,Dana:2016hx}. Such new fluorophores offer 
 the potential to multiplex signals across non-overlapping 
 wavelengths: this can enable sensing two properties 
 simultaneously (e.g., calcium and voltage), or can enable sensing
@@ -156,11 +155,11 @@ to a specific behavior or circuit.
 
 \paragraph{Field of view.} Optical interrogation and manipulation 
 of neural circuits offers a number of additional advantages 
-beyond the probe and targeting flexibility. One of the big 
+beyond the probes and targeting flexibility. One of the big 
 advantages is the ability to interface with neurons over a 
 large field of view, providing simultaneous access to thousands 
 of neurons \cite{Mohammed:2016fq}. New iterations have scaled 
-this up to hemisphere or skull sized imaging windows, exposing 
+this up to hemisphere- or skull-sized imaging windows, exposing 
 millions of neurons \cite{Kim:2016hh}. Through the large field 
 of view, optical techniques provide the ability to track 
 information encoding or behavioral modulation throughout a 
@@ -173,16 +172,17 @@ identify the salient activity.
 achieves a large spatial field of view, it also enables long
 term tracking of individual neurons. Cells can be tracked 
 across days to understand how neural encoding and activity 
-changes with time. For example, in recording calcium activity 
+changes with time. For example, recording calcium activity 
 in the song bird premotor area exposed instability in 
 neural encoding \cite{Liberti:2016bc} that was not visible in 
 previous electrophysiology experiments, where single cells 
 can often only be tracked on the scale of hours 
 \cite{Hahnloser:2002hj}.
 
-\paragraph{Awake behaving experiments.} Although inherent in 
-long term access, it is important to emphasize the optically 
-interfacing with the brain does not preclude awake behaving 
+\paragraph{Awake behaving experiments.} This goes hand-in-
+hand with the longitudinal access, but it is worth 
+explicitly emphasizing that optically interfacing with the 
+brain does not preclude awake behaving 
 experiments. Many interface technologies, discussed in the 
 next section, allow recording animals in freely behaving 
 paradigms. In the song bird example just mentioned, this 
@@ -207,10 +207,10 @@ below.
 \paragraph{Multi-photon microscopy.} Multi-photon microscopy
 provides powerful and precise access to fluorescent indicators,
 achieving greater precision in the depth axis through the 
-two photo absorption and improving penetration by exciting the 
-tissue with higher wavelength tissue \cite{Xu:1996ul}. In addition,
+two photo absorption and improving penetration by exciting  
+with higher wavelength light \cite{Xu:1996ul}. In addition,
 the two-photon absorption decreases the amount of excitation light 
-hitting the tissue, reducing the chance of \cite{Denk:1990ws}.
+hitting the tissue, reducing the chance of bleaching \cite{Denk:1990ws}.
 Three-photon microscopy further builds on these principles, 
 achieving greater penetration, allowing imaging indicators 
 at depths exceeding 1~mm \cite{Horton:2013gxa,Wang:2017jp}.
@@ -223,7 +223,7 @@ experiments. In addition, the types of experiments are constrained,
 often relying on recording in animals that are head fixed. 
 Head-mounted two photon microscopes show 
 potential \cite{Helmchen:2001tw,Flusberg:2005tq}, but these 
-have not achieved the reliability and stability necessary for 
+have not achieved the reliability or stability necessary for 
 widespread use.
 
 \paragraph{Single photon microscopy and miniature microscopes.}
@@ -234,8 +234,8 @@ of important advantages. Most notably, single photon microscopy
 can readily be scaled to small applications, allowing recording 
 from freely behaving animals through miniature head-mounted 
 microscopes \cite{Ghosh:2011ee,Cai:2016hm,LibertiIII:2017df}.
-These setups often come with a lower price tag and enable 
-recording during less constrained behaviors.
+These setups come with a lower price tag and enable 
+recording animals during less constrained behaviors.
 
 Variations on the standard miniature microscopes are being 
 developed that incorporate some of the advantages of multi-photon
@@ -254,18 +254,18 @@ microscopy for high sensitivity, high temporal resolution
 bulk recording. For example, it is enables recording bulk 
 fluorescence from axonal projections \cite{Gunaydin:2014dh}. 
 Such fibers setups are also frequently used to deliver 
-excitation light to opsins in the target region, in order
+excitation light to opsins in a target region, in order
 to modulate neural activity \cite{Warden:2014bx}.
 
 Multi-site fiber photometry has scaled these techniques up to 
 8--12 fibers, each of which can be implanted in a different site.
-Collectively, the fibers enable simultaneously recording bulk 
+Collectively, the fibers enable simultaneous recording or bulk 
 fluorescence across brain regions \cite{Guo:2015gu}.
 
 \paragraph{Waveguides and new implant.} The three methods 
 above have widespread usage, but there are a number of new 
 approaches being development that combine optical and electrical 
-components to move both illumination and detection to the probe.
+components to move both illumination and detection to an implantable probe.
 With such devices, it is possible to use less light power, 
 more easily image large volumes and use waveguides to achieve 
 targeted excitation \cite{Warden:2014bx,Wu:2015gk,Segev:2017en}.
@@ -277,7 +277,7 @@ section are widely used to optically record or manipulate
 neural activity. Yet all of these techniques are constrained 
 by the light scattering and absorption of the brain, which 
 either limits the techniques to more superficial regions or 
-requires more invasive methods to access deep brain regions.
+requires more invasive implants to access deep brain regions.
 
 \paragraph{Multi-photon microscopy.} Two- and three-photon 
 microscopy achieve greater penetration through use of 
@@ -285,6 +285,8 @@ wavelengths that have lower scattering coefficients in
 tissue \cite{Wang:2017jp}. This is especially true for 
 three-photon microscopy, that is able to record 
 fluorescent indicator activity from depths exceeding 1~mm.
+But as stated before, these methods are generally 
+limited to head-fixed experimental paradigms.
 
 \paragraph{Implantable optics.} To reach further than 
 is accessible with three-photon microscopy, or to image 
@@ -297,10 +299,10 @@ access deeper brain structures.
 But thanks to an existing body of literature related to 
 electrode development, implants with a cross section 
 greater than 50~\si{\micro\meter} can cause neuronal 
-damage and depth over a region up to 100~\si{\micro\meter}
+damage and death over a region up to 100~\si{\micro\meter}
 from the implant \cite{Seymour:2007dj}. The insertion 
 trauma and the motion of the brain relative to the implant 
-after insertion can both trigger tissue encapsulation, 
+after insertion can trigger tissue encapsulation, 
 disruption of oxygenation and  excitotoxic cell death
 \cite{Szarowski:2003cz,Polikov:2005cq,McConnell:2009hr,Freire:2011gl}.
 Implants that have a small cross section ($<$10~\si{\micro\meter}) 
@@ -312,7 +314,7 @@ and are rigid.
 
 As a result, GRIN lenses and other optical implants damage 
 damage or destroy the tissue in the immediate path and 
-are often encapsulated in glia due to the induced foreign 
+are often encapsulated in glia due to the induced  
 tissue response \cite{Lee:2016ko}. The interface will 
 collect fluorescence activity from neurons just beyond this 
 region of encapsulation. Yet the full impact of the implant 
@@ -328,7 +330,7 @@ removing superficial tissue, it is possible to directly access
 the region of interest and apply standard imaging techniques 
 (such as a head-mounted microscope or multi-photon imaging). 
 But the contribution of superficial regions and local connectivity 
-are both jepoddized or obliterated in such an approach.
+are both jeopardized or obliterated in such an approach.
 
 \section{Proposed Solution}
 %		Bidirectional optical access
@@ -346,8 +348,7 @@ arrays developed for electrophysiology
 \cite{Guitchounts:2013bs,Markowitz:2015ko}. The optical fiber 
 bundles contain hundreds or thousands of multimode 
 optical microfibers as small as 6.8~\si{\micro\meter} in diameter, 
-displacing significantly less brain tissue and minimizing 
-contact between tissue and non-biological surfaces as 
+displacing significantly less brain tissue as 
 compared with existing optical fiber implants. As each 
 fiber travels independently and finds a path of least 
 resistance, the fibers separate and splay, expanding 
@@ -365,7 +366,7 @@ light confinement. By cutting the fiber bundle in half, we
 gain access to the individual fibers, which can be directly 
 implanted into the tissue. Outside of the brain, the fibers 
 converge to a polished imaging surface where the fibers are 
-arranged in a light lattice that can be mounted under a 
+arranged in a tight lattice that can be mounted under a 
 traditional fluorescence microscope objective.
 
 This approach achieves a number of the usual advantages 
@@ -378,8 +379,8 @@ that the fibers splay during insertion, a bundle can spread
 out over 1~mm at a depth of 3~mm, sampling fluorescent 
 activity over a large 3D volume. Because 
 each fiber is flexible and has a small cross section, the 
-individual fibers will not have the same impact as a 
-larger implant, preserving more of the local connectivity 
+individual fibers will not have the same impact as a larger,
+more rigid implant, preserving more of the local connectivity 
 and network dynamics. Finally, because each fiber has 
 near total internal reflection, it will deliver excitation 
 light to and collect fluorescence from a small amount of 
