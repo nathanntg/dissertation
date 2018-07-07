@@ -276,12 +276,12 @@ of timing performance.
 \subsection{Analysis pipeline}
 \label{sec:pipeline}
 
-% TODO: potentially add open source link
-%\footnote{The software is open source and accessible at \url{https://github.com/...}}
-
 Given the large file size in chronic recordings (200~GB), 
 we designed a custom set of tools to aid in file 
-processing and analysis. We created a Python script to 
+processing and analysis.\footnote{The software is open 
+source and accessible at 
+\url{https://github.com/nathanntg/fiber-pipeline}} 
+We created a Python script to 
 convert the Hamamatsu CXD file format to raw binary files, 
 allowing direct frame indexing. Next, a set of custom 
 MATLAB classes allowed composing a node based processing 
