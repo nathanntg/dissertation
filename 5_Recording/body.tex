@@ -22,7 +22,7 @@ tissue, constraining optical techniques to more superficial tissue.
 
 
 
-Three-photon imaging, which is at the cutting edge optical techniques,
+Three-photon imaging, which is at the cutting edge of optical techniques,
  can record from intact brain tissue at depths exceeding 
 1~\si{\milli\meter} \cite{Horton:2013gxa,Wang:2017jp}. But to reach 
 regions beyond this depth, current research relies on either removing 
@@ -61,11 +61,13 @@ microscope.
 
 
 
-We have previously described histology evaluating the splay of the 
+In \cref{chapter:histology}, we have described histology evaluating 
+the splay of the 
 fiber bundles and the presence of NeuN-stained cells in close 
-proximity to the fiber tips (\sref{sec:results-histology}), and have modeled 
-the interface capabilities and properties of the bundles (\sref{sec:results-modeling}). 
-In this work, we share initial in vivo recordings of fluorescence, 
+proximity to the fiber tips; in 
+\cref{chapter:modeling}, we have modeled 
+the interface capabilities and properties of the bundles. 
+In this chapter, we share initial in vivo recordings of fluorescence, 
 including intravenous fluorescent agents, calcium-linked fluorescence 
 during cortical spreading depolarization (CSD) and sensory evoked 
 fluorescence resulting from forepaw stimulation. The intravenous 
@@ -138,12 +140,13 @@ The fiber bundle was held in a manipulator attached to the stereotaxic
 fibers orthogonal to the surface of the brain. The fibers were slowly 
 lowered into the tissue at a rate of approximately 
 500~\si{\micro\meter} per minute. After the fibers were lowered to a 
-depth corresponding with a cortical layer V (500--600~\si{\micro\meter}), 
+depth corresponding with cortical layer V (500--600~\si{\micro\meter}), 
 the bundle was secured to the skull surrounding the craniotomy with 
 acrylic.
 
 In three animals, the right occipital bone 
-was thinned, contralateral to the headpost, for laser speckle imaging.
+was thinned, contralateral to the headpost and ispilateral to the 
+fibers, for laser speckle imaging.
 
 In five animals, a frontal craniotomy was made, contralateral to 
 the head post, to allow application of KCl in order to induce a 
@@ -211,8 +214,8 @@ were converted to spatial speckle contrast ($K$) using a sliding grid of
 7$\times$7 pixels \cite{Tom:2008hm}. Speckle contrast images were 
 converted to correlation time values (using the formula $1/K^2$), which 
 are inversely and linearly proportional to mean blood velocity. Relative 
-blood flow changes in a ROI ($\sim$0.2$\times$0.2~mm) were calculated 
-by dividing correlation time values at each time point by baseline value 
+blood flow changes in an ROI ($\sim$0.2$\times$0.2~mm) were calculated 
+by dividing correlation time values at each time point by the baseline value 
 (calculated by averaging 60 images acquired over 1~min before initiation 
 of CSD).
 
@@ -257,7 +260,7 @@ shrunk to 75\% of their original size. The analysis pipeline then
 makes a second pass through the video, applying the same motion 
 correction transform and averaging the pixel intensity for all pixels 
 in each fiber region of interest. The end result is an intensity time 
-course for each fibre of interest. Traces are converted to 
+course for each fiber of interest. Traces are converted to 
 $\Delta$F/F$_0$, where F$_0$ corresponds with the median intensity in the 
 prior to the fluorescence onset.
 
@@ -294,8 +297,9 @@ $\Delta$F/F$_0$ intensity for a single fiber from the recording.}
 \label{fig:iv-fitc}
 \end{figure}
 
-Induced cortical spreading depolarization (CSD). In transgenic animals
- expressing a calcium sensitive fluorescent probe, the ability to 
+\paragraph{Induced cortical spreading depolarization (CSD).} In 
+transgenic animals 
+expressing a calcium sensitive fluorescent probe, the ability to 
 record calcium fluorescence was measured during a cortical spreading 
 depolarization by dissolving a pellet of KCl on the surface of the 
 brain, which is known to evoke multiple CSDs in anesthetized mice 
@@ -328,7 +332,7 @@ fluorescent event in between.}
 \label{fig:csd}
 \end{figure}
 
-As CSD propagate across the cortex at approximately 
+As a CSD propagates across the cortex at approximately 
 2~\si{\milli\meter} per minute \cite{Ochs:1960jx,Pietrobon:2014gn}, we
  can look at the acquired images of the fiber bundle for timing 
 differences in fiber fluorescence that corresponds with this 
@@ -444,7 +448,7 @@ GCaMP3 mice, we did not observe an increase in fluorescence following
 application of the KCl pellet. We believe that if a CSD occurred, it 
 was after our 20 minute recording session. Following the recording 
 session, we discovered that the homeothermic blanket malfunctioned and
- the mouse's body temperature drop by 2\si{\celsius}, which may 
+ the mouse's body temperature dropped by 2\si{\celsius}, which may 
 account for the lack of CSD.
 
 Finally, the results recording sensory evoked fluorescent activity are
@@ -465,7 +469,7 @@ recordings, we attempted to transition to $\alpha$-chloralose, but were
 unable to sustain the animal's anesthetized state; as a result, we 
 continued light isoflurane, potentially interfering with the cortical 
 response to the forepaw stimulation. During a subsequent round of 
-recording via the larger diameter fibers found no stimulation-locked 
+recording via the larger diameter fibers, we found no stimulation-locked 
 fluorescence, consistent with an observed deepening in the animal's 
 anesthesia and corroborating the potential role of anesthesia in 
 suppressing sensory evoked signals.
