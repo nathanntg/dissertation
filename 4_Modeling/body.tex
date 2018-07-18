@@ -57,14 +57,11 @@ Z = & M S \text{ where } \vec{z}_i = \vec{w}^{-1} * \vec{y}_i
 
 Where $Y$ is the recorded fiber output, $M$ is the mixing matrix, and $X$ is the fluorescence signal produced by convolving the underlying signal $\vec{s}_i$ of neuron $i$ with the indicator waveform $\vec{w}$. By applying an inverse filter ($\vec{w}^{-1}$), we produce matrix $Z$ that is equal to applying the mixing directly to the underlying signals.
 
-Next, we apply the nonnegative independent component analysis algorithm \cite{Plumbley:2003dw} to perform blind source separation under the constraints of nonnegativity. The algorithm first whitens the data, and then applies a series of orthonormal rotations to reduce the error between $Z$ and the reconstruction of $Z$ from the rectified (nonnegative) components of $S$.
+Next, we apply the nonnegative independent component analysis algorithm \cite{Plumbley:2003dw} to perform blind source separation under the constraints of nonnegativity.\footnote{The software is open source and accessible at \url{https://github.com/nathanntg/fiber-source-separation}} The algorithm first whitens the data, and then applies a series of orthonormal rotations to reduce the error between $Z$ and the reconstruction of $Z$ from the rectified (nonnegative) components of $S$.
 
 Having separated the independent signals, we can then apply the waveform filter ($\vec{w}$) to produce fluorescence traces that correspond with the identified independent components.
 
 As there are many more neurons than fibers, separating all neural activity is an underdetermined problem. This technique is limited to extracting as many neural traces as there are fibers.
-
-% TODO: potentially add open source link
-%\footnote{The software is open source and accessible at \url{https://github.com/...}}
 
 \paragraph{Evaluating source separation.} The evaluation of the source separation must consider both that the output of the source separation is a small subset of the underlying neural signals, and the underdetermined nature of the blind source separation. To this end, we calculate the correlation coefficients of each separated signal ($\hat{\vec{x}}_i$) with each true, simulated fluorescence trace ($\vec{x}_i$). The quality of the separation is then evaluated based on how many of the separated signals have a sufficiently high correlation with a true trace. In the results section, we evaluate threshold choices and how they impact the number of extracted ``true'' signals.
 
