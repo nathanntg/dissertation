@@ -7,8 +7,6 @@
 % must have a trailing slash
 \graphicspath{{5_Recording/Figures/}}
 
-% TODO: read through this section
-
 \section{Introduction}
 
 Optical techniques for recording fluorescent probes are a cornerstone 
@@ -18,7 +16,8 @@ genetically encoded probes and techniques for targeting expression, it
  dynamics in a precisely selected neuronal subpopulation 
 \cite{Emiliani:2015jl,Gong:2015is}. Yet these techniques are 
 inherently constrained by the scattering and absorption properties of 
-tissue, constraining optical techniques to more superficial tissue.
+tissue, constraining optical techniques to more superficial brain
+regions.
 
 
 
@@ -43,9 +42,9 @@ neighboring brain regions, we proposed a new optical interface in
 bundles of hundreds or thousands of small diameter optical microfibers
  (as small as 6.8\si{\micro\meter}). When implanted, each fiber moves 
 independently and follows a path of least resistance, causing the 
-fibers to splay as they move deeper. At a depth of 
+fibers to splay as they are inserted. At a depth of 
 2.9~\si{\milli\meter}, a bundle of 1,000 fibers can spread over 
-1~\si{\milli\meter} in diameter. Because of the small fiber diameter 
+1~\si{\milli\meter} in diameter. Because of the small diameter 
 and flexible fibers, the fibers displace less tissue and elicit less 
 tissue response, while still enabling interfacing with a large 3D 
 volume of tissue.
@@ -88,7 +87,7 @@ endoscopes with 4,500 individual fibers each (Schott 1534180). The
 bundles are made as a coherent imaging bundle with an acid soluble 
 glass between the individual fibers, in addition to the standard core 
 and cladding; during manufacturing, the acid soluble glass is 
-dissolved leaving the dissociated fibers, in order to increase bundle 
+dissolved leaving the dissociated fibers, which increases bundle 
 flexibility \cite{Gerstner:2004to}. Each fiber has a core diameter of 
 5.1~\si{\micro\meter}, and a numerical aperture of 0.377. The second 
 variation, bundles of 37~\si{\micro\meter} fibers, are made as 
@@ -128,7 +127,7 @@ maintained at 37\si{\celsius} by a homeothermic blanket. The animal
 was placed in a stereotaxic frame for the surgery and implant 
 procedure. A metal head post was secured to the temporal bone for 
 immobilizing the head during recording. Contralateral to the head 
-post, a craniotomy at either the barrel cortex or the forepaw region 
+post, a craniotomy was created at either the barrel cortex or the forepaw region 
 of the primary somatosensory cortex, sized to match the fiber bundle 
 implant (1--1.5~\si{\milli\meter}). The dura within the craniotomy was
  removed.
@@ -136,7 +135,7 @@ implant (1--1.5~\si{\milli\meter}). The dura within the craniotomy was
 
 
 The fiber bundle was held in a manipulator attached to the stereotaxic
- rig, with the fiber bundle positioned over the durotomy, with the 
+ rig, with the fiber bundle positioned over the durotomy and the 
 fibers orthogonal to the surface of the brain. The fibers were slowly 
 lowered into the tissue at a rate of approximately 
 500~\si{\micro\meter} per minute. After the fibers were lowered to a 
@@ -144,7 +143,7 @@ depth corresponding with cortical layer V (500--600~\si{\micro\meter}),
 the bundle was secured to the skull surrounding the craniotomy with 
 acrylic.
 
-In three animals, the right occipital bone 
+In three animals, the occipital bone 
 was thinned, contralateral to the headpost and ispilateral to the 
 fibers, for laser speckle imaging.
 
@@ -221,7 +220,7 @@ of CSD).
 
 Laser speckle frame acquisition was synchronized with the fiber 
 recording by acquiring frame synchronization pulses from both cameras 
-throughout the recording.
+over the duration of the recording.
 
 
 
@@ -238,8 +237,8 @@ associated muscle contractions.
 
 Stimulation pulses were synchronized with the fiber recording by 
 acquiring two signals channels, one corresponding with the fiber CMOS 
-frame acquisition and one corresponding with the stimulation pulses 
-throughout the recording.
+frame acquisition and one corresponding with the stimulation pulses, 
+over the duration of the recording.
 
 \subsection{Analysis}
 
@@ -249,10 +248,10 @@ sequences using a custom Python script. Frames were then processed via
  pass, frames were motion corrected using an implementation of the 
 Scale-Invariant Feature Transform (SIFT) algorithm 
 \cite{vedaldi08vlfeat,lowe1999object,Lowe:2004kp} and then calculating
- the 1st and 99th percentile pixel intensities across the video 
-sequence. Calculating a pixel range image (calculated by subtracting 
-the 1st percentile intensity from the 99th percentile intensity), 
-fibers with variability in fluorescent activity are clearly visible. 
+ the 1st and 99th percentile pixel intensities across all video frames.
+By calculating a pixel range image (by subtracting 
+the 1st percentile intensity from the 99th percentile intensity for each pixel), 
+fibers with dynamic fluorescent activity are clearly visible. 
 MATLAB's circle finding algorithm \cite{Atherton:1999dl} is used to 
 automatically draw regions of interest (ROIs) around fibers with high 
 variability. To minimize artifacts from motion correction, ROIs are 
@@ -262,7 +261,7 @@ correction transform and averaging the pixel intensity for all pixels
 in each fiber region of interest. The end result is an intensity time 
 course for each fiber of interest. Traces are converted to 
 $\Delta$F/F$_0$, where F$_0$ corresponds with the median intensity in the 
-prior to the fluorescence onset.
+period prior to the fluorescence onset.
 
 To test the statistical significance of the sensory evoked behavior, a
  Student's t-test was performed comparing the background subtracted 
@@ -280,7 +279,7 @@ across a range of externally evoked fluorescent events.
 \paragraph{Intravenous fluorescein (FITC).} Sensitivity to fluorescent agents in 
 the vasculature was measured by injecting high molecular weight 
 fluorescein conjugated dextran, while recording fluorescence via the 
-implanted fibers. \Fref{fig:iv-fitc} shows fluorescent traces for retro-orbital 
+implanted fibers. \Fref{fig:iv-fitc} shows fluorescent traces for a retro-orbital 
 injection of 2 MDa FITC. The fluorescent bolus is visible 1--2 seconds
  after injection, and has more sustained fluorescence than the higher 
 molecular weight FITC (not shown). The fluorescent bolus corresponded 
@@ -342,7 +341,7 @@ illustrating the propagation of the CSD.
 \begin{figure}
 \includegraphics[width=\textwidth]{fig4-csd-frames.eps}
 \caption[Images of fiber bundle during CSD]{\textbf{Frames of polished imaging surface show progression of cortical 
-spreading depolarization (CSD).} Three minutes after placing dissolving
+spreading depolarization (CSD).} Three minutes after dissolving
  a KCl pellet on the brain of a Thy1-GCaMP6f mouse, the fluorescence 
 associated with a CSD was visible via the implanted 
 8~\si{\micro\meter} fibers. Four background subtracted frames selected
@@ -410,14 +409,14 @@ Next, we turn our attention to sensing genetically-expressed
 fluorescent probes (in this case, GCaMP6). In these experiments, we 
 explore the most intriguing aspect of the splaying optical fiber 
 bundles, where the fibers can sample neural activity throughout a 3D 
-volume of tissue while retaining neurons in close proximity to the 
+volume of tissue while retaining intact neurons in close proximity to the 
 fibers and, as a result, decreasing the likelihood of a large tissue 
 response that may interfere with local connectivity and network 
 dynamics (see \sref{sec:results-histology}).
 
 During a bright and distributed event such as a CSD, we see a distinct
  increase in fluorescence that is consistent with previously described
- calcium dynamics CSD \cite{Gniel:2010jn}. The change in fluorescence 
+ calcium dynamics during CSD \cite{Gniel:2010jn}. The change in fluorescence 
 was bright---clearly visible while recording, before application of 
 any preprocessing steps such as background subtraction. In addition to
  seeing the fluorescence corresponding with CSDs identified via the 
@@ -437,7 +436,7 @@ additional dynamics in the fluorescence; specifically, after the first
 return to baseline. This may reflect the fact that intracellular 
 calcium levels drop quickly after the CSD, but full restoration of 
 pre-CSD concentrations takes more than 5 minutes, or may reflect 
-different variability in the response to CSD across cortical layers 
+variability in the response to the CSD across cortical layers 
 \cite{Gniel:2010jn}.
 
 We observed CSDs in four of the five animals following application of 
@@ -503,8 +502,8 @@ hundreds or thousands of microfibers as an interface to optically
 access 3D volumes of tissue. Incorporating the insights from these 
 initial recording attempts will enable improving surgical protocols 
 and moving towards an awake, behaving paradigm. With these iterations,
- we hope to improve sensitivity to sensory evoked fluorescence 
-activity, such that it can be reliability recorded through both the 
+ we hope to improve sensitivity to sensory-evoked fluorescence 
+activity, such that it can be c recorded through both the 
 small and large diameter fibers.
 
 
