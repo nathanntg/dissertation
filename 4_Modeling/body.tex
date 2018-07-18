@@ -34,7 +34,7 @@ M_{i, j} = h_{i, j} \sum_{k = 1}^n g_{j, k}
 \end{align}
 
 
-Where $h_{i, j}$ is the emission from neuron $j$ collected by fiber $i$ and $g_{j, k}$ is the excitation from fiber $k$ that reaches neuron $j$.
+Where $h_{i, j}$ is the emission from neuron $j$ collected by fiber $i$ and $g_{j, k}$ is the excitation from fiber $k$ that reaches neuron $j$. For the analysis presented here, we assume that excitation is static---that $g_{j, k}$ does not change over time.
 
 \paragraph{Neural population simulation.} Equipped with this model of the optical interface properties for a bundle of microfibers, we can now evaluate the ability to measure signals from a simulated neural population. We simulate a volume of tissue, of sufficient size to ensure that it includes all regions of non-negligible fluorescence sensitivity (usually around 1.2~mm$^3$), with a uniform distribution of neurons. We vary the density of neurons to understand the impact of signal density, but use densities that are consistent with relevant subpopulations of interest \cite{Walton:2012fj,KosubekLanger:2017jb}. Unless explicitly stated, simulations use a density of 250,000 neurons per mm$^3$. We assume all neurons express the relevant genetic probe.
 
