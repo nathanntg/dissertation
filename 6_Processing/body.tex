@@ -7,8 +7,6 @@
 % must have a trailing slash
 \graphicspath{{6_Processing/Figures/}}
 
-% TODO: read through this section
-
 \section{Introduction}
 
 Acute recordings from bundles of optical microfibers 
@@ -18,19 +16,21 @@ regions. The splaying fibers deliver excitation light,
 and collect fluorescent emissions during a cortical 
 spreading depolarization, enabling visualizing the 
 associated calcium dynamics and propagation of the 
-depolarization. Yet the real value of the interface is 
-to record fluorescence in awake, behaving animals.
+depolarization. Yet a large part of the value proposition 
+of the interface is the potential to record fluorescence 
+in awake, behaving animals.
 
 In order to achieve such recordings, a new optical 
 configuration is required that will allow recording 
 animals during a complex behavioral task. This necessitates 
-a way to store and arrange the fiber such that it is 
-protected from physical damage, but allows the animal 
-to freely move about their enclosure.
+a way to physically manage the fibers such that the bundle is 
+protected from physical damage, while maintaining optical 
+access to the individual fibers and allowing the animal 
+to freely move within their enclosure.
 
 Specifically, we intend to use the fibers to record 
 fluorescence activity in singing zebra finches. 
-Their ability to move about their enclosure freely 
+Their ability to freely move about their enclosure 
 is crucial; when constrained, the animals will rarely 
 sing. To this end, we have designed a recording interface 
 that holds a reinforced fiber bundle in a passive 
@@ -38,20 +38,20 @@ commutator above the bird's enclosure. As the bird moves
 around its cage, the fiber can rotate below the objective 
 of a traditional fluorescence microscope. 
 
-Custom acquisition software controls video and analog 
-data acquisition; in the case of the zebra finches, we 
-use the analog data channels to record synchronized audio, 
+Custom acquisition software controls synchronized acquisition of 
+video and analog data; in the case of the zebra finches, we 
+use the analog data channels to record audio, 
 which is both used for triggering acquisition and for subsequent 
-analysis. The software is also capable of near-real-time 
+analysis---specifically, to align calcium fluorescence across
+song renditions. The software is also capable of near-real-time 
 analysis of acquired video frames, extracting fiber 
-intensity information, which can be used to generate 
-behavioral feedback or brain machine interface 
-functionality.
+intensity values, which can be used to trigger 
+behavioral feedback or create a basic brain machine interface.
 
 Based on the design configuration used to record from 
 seven zebra finches, each for a minimum of a week, we 
 describe a hardware and software configuration that 
-enables longitudinally recording fluorescent activity 
+enables longitudinally recording fluorescence  
 from an awake behaving animal.
 
 \section{Methods}
@@ -95,13 +95,13 @@ The polyimide strip is cut slightly shorter than the fiber
 bundle, so that when the animal moves or twist, the force 
 will be primarily exerted on the strip rather than the bundle.
 To secure the fiber bundle to the polyimide strip, we 
-punched 1.5~mm holes in the strip, through which the 
-fiber bundle was threaded. This ensured that the slack 
-in the fiber bundle did not dangle or interfere with 
-the animal's behavior.
+punched 1.5~mm holes in the strip, and thread the fiber 
+bundle through the holes. This ensures that the slack 
+in the fiber bundle does not dangle in a way that might 
+interfere with the animal's behavior.
 
 Depending on the duration of the recording session, the 
-fiber can either be fixed below the fluorescent microscope 
+fiber can either be fixed below the fluorescence microscope 
 or can be mounted in a low-friction passive commutator,
 constructed from precision ball bearings (\fref{fig:commutator}), that allows 
 the fiber bundle to rotate as the animal moves. Given the 
@@ -127,7 +127,7 @@ motion correction is applied to the recorded video
 
 In situations requiring longer exposure times, the 
 rotation of the fiber may be problematic. We tested a 
-further variation that used a servo to apply a rubber pad 
+further variation that used a servo to apply a rubber ``brake'' pad 
 to the passive commutator during recording, temporarily 
 preventing rotation.
 
@@ -148,7 +148,7 @@ fiber. Fluorescence activity was recorded either
 with a USB compatible CMOS camera (3rd eye 
 electronics, MC900 paired with DM420 frame capture 
 device) configured for an exposure of 33~ms resulting 
-in 30 frames per second recording of 640$\times$480 
+in a 30 frames per second recording of 640$\times$480 
 8 bit pixels or with an 
 sCMOS camera (Hamamatsu ORCA-Flash4.0 v2) configured 
 for 2$\times$2 binning and an exposure of 50~ms, 
@@ -167,8 +167,6 @@ This allowed isolating the data-intensive (40
 megabytes per second) video acquisition from the 
 analog signal acquisition and analysis.
 
-% TODO: continue here
-
 \subsection{Near-real-time software}
 
 To manage and trigger acquisition, and to do near-real-time signal
@@ -183,25 +181,25 @@ grabbers and cameras. The software can capture video or video
 synchronized with multi-channel analog data (including 
 either audio or other analog data). Video and analog data are 
 written to disk in MPEG-4 container files with video encoded at 
-full resolution either uncompressed or using the H.264 or lossless 
-MJPEG Open DML codecs and audio encoded using either the AAC codec 
-or the linear PCM format with a sampling rate of up to 
+full resolution either uncompressed, or using the H.264 or lossless 
+MJPEG Open DML codecs, and audio encoded using either the AAC codec 
+or the Apple Lossless format with a sampling rate of up to 
 96~\si{\kilo\hertz}. Simultaneously, the software writes metadata 
 including frame timing, region of interest intensity and analysis  
 parameters to a text file (CSV format).
 
 \begin{figure}
 \includegraphics[width=\textwidth]{fig2-software.png}
-\caption[Software for capture near-real-time analysis]{\textbf{User interface of acquisition
+\caption[Software for capture and near-real-time analysis]{\textbf{User interface of acquisition
 control software capable of near-real-time analysis.} The software 
-controls capture related peripherals, including USB camera sensors,
+controls acquisition-related peripherals, including USB camera sensors,
 light sources and microcontroller breakout boxes, and manages 
 synchronized acquisition of video and analog signals. During 
-acquisition, the software can process video frames, extracting 
+recording, the software can process video frames, extracting 
 multiple annotated regions of interest, and can process analog 
-signals, such as applying audio template matching. Analysis 
-can trigger external feedback, acting as a basic brain machine 
-interface.}
+signals, such as performing audio template matching. Analysis 
+is used to trigger acquisition or external feedback, acting as 
+a basic brain machine interface.}
 \label{fig:software}
 \end{figure}
 
@@ -215,14 +213,14 @@ The software is able to perform near real-time analysis on both the
 video frames and the analog input channels---these channels enable
 low-latency, video-aligned acquisition of audio, external TTL 
 pulses, electrophysiology or behavioral data. 
-For example, in experiments we have run recording fluorescence in songbirds, 
+For example, in experiments where we record fluorescence in songbirds, 
 we use the analog channels to acquire audio and trigger acquisition 
 based off song detection (by processing audio through a short-time
 Fourier transform to calculate the ratio of power in frequency 
 bins associated with song [1--10~kHz] to the power of frequency bins outside 
 the song range). The microcontroller is used to activate 
 the excitation light source, restricting illumination to periods of 
-singing and, as a result, restricting photobleaching. 
+singing and, as a result, minimizing photobleaching. 
 
 During monitoring and acquisition, the software can perform low-latency
 computational analysis of both the video frames and analog input. In 
@@ -243,7 +241,7 @@ regions of interest corresponding with two fibers.
 
 Given the broader range of analog analysis and applications, 
 the software does not have a graphical 
-user interface for defining analysis, but the code provides clear 
+user interface for defining analog signal analysis, but the code provides clear 
 extension points. We have extended and open sourced versions 
 of the software that use the analog signals to acquire and process 
 audio. Acquired audio is converted to a spectral representation 
@@ -259,16 +257,16 @@ vocalization) \cite{Pearre:2017cs}; upon detection, the software
 can provide aversive feedback (such as burst of white noise) 
 to perturb behavior.
 
-To evaluate the software latency, we blink an LED in the 
+To evaluate the software latency, we flash an LED in the 
 field of view of the camera, while recording the output trigger 
-controlled by the software to detect when the LED intensity is 
-detectable. The LED activation triggers activation on an 
-oscilloscope, which is to averaging mode (128-trigger average) 
+controlled by the software to measure when the LED intensity is 
+detectable. The pulse driving the LED also triggers acquisition on an 
+oscilloscope (Tektronix TBS 1022), which is set to averaging mode (128-trigger average) 
 in order to collect latency data. In addition, external logging
-flags in the software are used to evaluate processing time for 
+in the software is used to evaluate processing time for 
 specific steps in the analysis pipeline (such as ROI extraction).
 Audio processing is evaluated as described in \cite{Pearre:2017cs},
-using recordings of songs with a ground truth annotation on the 
+using recordings of songs with a ground truth annotations on the 
 second channel. The ground truth signal triggers oscilloscope 
 acquisition, again averaging over 128 trials to build a distribution 
 of timing performance.
@@ -284,25 +282,27 @@ source and accessible at
 We created a Python script to 
 convert the Hamamatsu CXD file format to raw binary files, 
 allowing direct frame indexing. Next, a set of custom 
-MATLAB classes allowed composing a node based processing 
-script, which would allow each frame to be processed in 
-isolation, minimizing the amount of memory need to work 
+MATLAB classes allows composing a node based processing 
+graph, which allows each frame to be processed in 
+isolation, minimizing the amount of memory needed to work 
 with the videos.
 
-Our standard pipeline involved iterating over video frames 
-twice. During the first pass, raw video frames were 
+Our standard pipeline involves iterating over video frames 
+twice. During the first pass, raw video frames are 
 passed into a Scale-Invariant Feature Transform (SIFT) 
 \cite{vedaldi08vlfeat,lowe1999object,Lowe:2004kp} 
 motion correction algorithm, capable of correcting 
 the rotation of the fiber bundle associated with the 
 passive commutator. The transformation matrices 
-associated with the motion correction were cached 
-for the second pass, and the motion corrected frames 
-were passed to statistical analysis nodes. The analysis 
-node accumulated statistics on each pixel, including 
+associated with the motion correction is cached 
+for the second pass. The motion corrected frames 
+are passed to statistical analysis nodes. The analysis 
+nodes accumulate statistics on each pixel, including 
 range, mean and percentile intensities. These statistics 
-enable identifying high variability fibers and defining 
-regions of interest for subsequent analysis.
+enable identifying high variability pixels (corresponding 
+with fibers collecting fluorescence), which can then 
+be used to define regions of interest for subsequent 
+analysis.
 
 During the second pass, the algorithm again applies the 
 motion correction transform to each frame, and extracts 
@@ -313,7 +313,7 @@ subtraction, depending on the desired output.
 
 \section{Results}
 
-The chronic fiber interface coupled and associated video 
+The chronic fiber interface configuration and associated video 
 acquisition and analysis software were used to record 
 from seven zebra finches for 7--23 days each (mean: 
 17~days). The recording results are not 
@@ -326,9 +326,10 @@ awake behaving recordings.
 The implanted fibers remained well secured over the 
 course of the recording, and the setup provided the 
 necessary freedom of motion to allow the birds to 
-sing. For all five animals, we recorded fluorescence 
-via the fiber and synchronized audio for hundreds 
-of song renditions per day.
+sing. For all seven animals, we recorded fluorescence 
+via the fibers and synchronized audio. Acquisition 
+was automatically triggered by singing, and the 
+animals performed hundreds of song renditions per day.
 
 After 23 days implanted in an awake behaving animal,
 we remeasured the optical attenuation. The optical 
@@ -339,8 +340,8 @@ measured in \sref{sec:methods-fibers}).
 \subsection{Analysis performance}
 
 To evaluate the near-real-time analysis and feedback, we recorded 
-signals that provide a reference signal that represents the 
-ground truth. 
+signals that include a ground truth reference signal, enabling 
+evaluation of accuracy and performance.
 
 Region of interest (ROI) video analysis was evaluated by measuring the
 time from LED onset to software feedback. The average time to trigger 
@@ -350,7 +351,7 @@ and software processing. This latency reflects the intrinsic
 limitations of a 33~ms exposure time (which accounts for 16.5~ms of 
 the delay) as well as the time spent capturing and decoding the video, 
 and communicating an output TTL via the microcontroller. 
-\Fref{fig:video-latency} depicts video controller latency.
+\Fref{fig:video-latency} depicts video analysis latency.
 
 \begin{figure}
 \includegraphics[width=\textwidth]{fig3-video-latency.eps}
@@ -358,7 +359,7 @@ and communicating an output TTL via the microcontroller.
 produces feedback in 24~ms, including exposure time.} To measure 
 the latency of the video analysis functionality in the 
 acquisition software, an LED was flashed in the field of view,
-while timing the delay until the output TTL indicating detection. 
+while timing the delay until detection of the output TTL indicating detection. 
 (a) Black: voltage driving LED light flash; blue: cumulative density 
 function (CDF) of TTL output. The latency from LED activation to 
 output TTL is 23.9 $\pm$ 3.9~ms (std. dev). This is consistent
@@ -406,9 +407,9 @@ the average latency is 0.0 $\pm$ 1.8~ms.
 \begin{figure}
 \includegraphics[width=\textwidth]{fig4-audio-latency.eps}
 \caption[Latency for audio processing]{\textbf{Audio analysis 
-produces feedback output in under 5~ms.} The acquisition 
+produces feedback in under 5~ms.} The acquisition 
 software extended with a neural network based syllable detection 
-tool, evaluated on annotated data, allowing evaluation of 
+tool, was evaluated on annotated data, allowing measurement of the 
 latency between actual syllable presentation and the detection 
 TTL pulse. If the TTL pulse was delivered via the attached 
 microcontroller, average latency was 0.0 $\pm$ 1.8~ms; if 
@@ -419,13 +420,7 @@ delivered via the audio line out, the latency increased to
 
 \section{Discussion}
 
-The design of the fiber bundles makes connectorization or 
-alignment of two fiber bundles challenging. Instead of an 
-attachable recording fiber, we have developed a recording 
-configuration that allows chronic recordings in awake 
-behaving animals. Based on initial 
-
-Given the challenges of cnonnectorizing or aligning fiber 
+Given the challenges of connectorizing or aligning fiber 
 bundle ferrules, each with a lattice of thousands of individual 
 fibers, we have developed and described an approach to 
 perform chronic recordings in awake behaving animals by 
@@ -445,7 +440,7 @@ show an increase in attenuation, suggesting that even
 with the polyimide reinforcement strip, either the implant 
 or recording process results in wear and tear on the 
 bundles of optical microfibers, increasing attenuation. 
-It may be valuable to collect more example to track 
+It may be valuable to collect more measurements to track 
 the decline in attenuation, and potentially improve 
 the chronic interface configuration to better protect 
 the fibers.
@@ -453,7 +448,7 @@ the fibers.
 With software capable of near-real-time analysis of
 fluorescence activity, the fibers can be used as a 
 brain machine interface (BMI) in which an animal controls 
-an external device through the measured calcium fluorescence 
+an external device through the calcium fluorescence 
 measured via the implanted fibers; for example, this could 
 be used to allow songbirds direct control over sound 
 generation \cite{Clancy:2014gw}. Other applications 
@@ -463,7 +458,7 @@ activity when detected.
 
 In our tests, the latency of triggering off 
 fluorescence activity was limited by the sensor 
-of the microscope, about 23.9 $\pm$ 3.9~ms 
+of the camera, about 23.9 $\pm$ 3.9~ms 
 (\fref{fig:video-latency}). For many experiments, 
 this response latency is acceptable. In the songbird, 
 for example, the sensory-motor latency from pre-motor 
@@ -481,7 +476,7 @@ for brain machine interface experiments in a
 system as precise as the songbird. For the zebra 
 finch, relative jitter between premotor commands 
 and auditory feedback is just a few milliseconds. 
-For some experiments lower latency and lower 
+For some experiments, lower latency and lower 
 variability may be desirable, which can be achieved 
 through a shorter exposure (higher frame rate). 
 To further decrease jitter, the acquisition process 
