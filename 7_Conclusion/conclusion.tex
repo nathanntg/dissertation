@@ -19,7 +19,7 @@ During insertion, each fiber moves independently,
 splaying throughout the tissue. The other end of the 
 fibers are arrayed in a regular lattice on a polished 
 imaging surface that can be readily mounted under a 
-traditional fluorescent microscope. As each fiber has a 
+traditional fluorescence microscope. As each fiber has a 
 core and cladding, achieving near total internal 
 reflection, the fiber carries light to the aperture, 
 where it can optically interface with a small region 
@@ -53,7 +53,7 @@ individual neural contributions. By combining
 knowledge of the underlying fluorescent indicator 
 waveform and mixing process, we use a form of 
 non-negative independent component analysis to 
-unmix simulated modeled neural activity.
+unmix simulated neural activity.
 
 In \cref{chapter:recording}, we presented initial 
 in vivo recording data from mice, including fluorescence 
@@ -66,7 +66,7 @@ fiber bundles as a recording interface, but also
 highlight additional areas for improvement (such 
 as refining the optics to achieve a higher 
 contrast to background ratio) and 
-reproduce the same success using smaller 
+reproducing the same success using smaller 
 diameter fibers.
 
 Finally, in \cref{chapter:processing}, we 
@@ -111,17 +111,17 @@ from genetically encoded calcium indicators during
 both a cortical spreading depolarization and a 
 forepaw stimulation experiment. The forepaw results 
 are promising, but also highlight challenges in 
-terms of contrast-to-noise and moving to chronic 
-implants with awake behaving mice.
+terms of contrast-to-noise and the need to move to 
+chronic implants with awake behaving mice.
 
 More work is needed to adapt the chronic recording 
 interface described in \cref{chapter:processing} to 
 new animal models, including mice. The dexterity of  
 mice and their tendency to chew on objects necessitates 
-a more active protection of the fiber implant.
+more active protection of the fiber implant.
 
 Such an interface will allow collecting additional 
-sensory-evoked fluorescent activity, without the 
+sensory-evoked fluorescence activity, without the 
 potential confounds of anesthesia. Being able to 
 repeat recordings in chronically implanted animals 
 will allow the brain to recover post-implant and will 
@@ -148,15 +148,15 @@ may be beneficial to construct a mesh or perforated
 structure that can be mounted on the surface of the 
 brain, which will serve to both pre-splay and reinforce 
 the fibers prior to their entering the tissue. Such a structure 
-may allow more reproducible splaying pattern. 
+may enable more reproducible splaying patterns. 
 
 In addition, such a structure may 
 benefit implants at different depths. Currently, 
 much of the fiber distribution comes from the slow 
 spreading process as the fibers are lowered through
-the tissue. For shallower, pre-splaying the fibers 
+the tissue. For shallower implants, pre-splaying the fibers 
 will ensure a wide distribution without requiring 
-the deep implant to achieve the fiber distribution. 
+the depth to achieve the fiber distribution. 
 For deeper implants, fibers longer than 5~mm are 
 more likely to buckle. By having a structure around 
 the fibers before they come into contact with the 
@@ -168,7 +168,7 @@ greater than 5~mm.
 
 The splaying optical microfibers have the ability to 
 both deliver excitation light to the tissue, and to 
-collected fluorescent emissions from neurons 
+collect fluorescent emissions from neurons 
 surrounding the fiber aperture. In concert, this 
 enables fluorescent recording, which has been the 
 primary focus of this effort. But given that the 
@@ -185,7 +185,7 @@ subset of the fibers, enabling precise activation
 or silencing of a small number of neurons (see 
 the modeling in \sref{sec:histology-modeling}). 
 Specifically, coupling 2.5~\si{\micro\watt} of 
-470~nm into a fiber should provide sufficient 
+470~nm light into a fiber should provide sufficient 
 optical power to activate channelrhodopsin over a 
 18,000~\si{\micro\meter}$^3$ region surrounding 
 the tip of the fiber.
@@ -264,12 +264,12 @@ stimulation, which have similar requirements to
 existing miniature microscopes. 
 
 The design of a miniature fluorescence microscope 
-closely mirrors the larger fluorescent microscopes 
-we used to image through the fiber bundles 
+closely mirrors the larger fluorescence microscopes 
+we use to image through the fiber bundles 
 (\fref{fig:miniscope}). An LED light source 
 provides excitation light through an excitation 
-filter and dichroic, while fluorescent activity 
-returns, passing through the dichroic and an 
+filter and dichroic, while fluorescent emissions 
+return, passing through the dichroic and an 
 emission filter to a CMOS. Existing miniature 
 microscopes benefit from open and adaptable 
 adaptable designs \cite{Cai:2016hm,LibertiIII:2017df},
@@ -284,7 +284,7 @@ behaving animals.
 \caption[Miniature microscope]{\textbf{Miniature, head-mounted 
 microscope with potential to record from fiber bundle.} Existing 
 head-mounted miniature microscopes have a compact design modeled 
-off traditional single photon fluorescence microscopy. By 
+on traditional single photon fluorescence microscopy. By 
 adapting the objective optics, such a configuration could 
 provide a stable, chronic interface for imaging through a bundle 
 of optical microfibers. \cite{LibertiIII:2017df}}
@@ -295,7 +295,7 @@ The biggest challenge to building a head
 mounted microscope for imaging via the fiber 
 bundles is ensuring sufficient sensitivity 
 to measure fluorescent signals and, ideally,
-to be processed by the described source 
+to enable processing the signals via the described source 
 separation techniques. As shown in 
 \cref{chapter:recording}, existing 
 sensory-evoked recordings have a low 
@@ -323,9 +323,9 @@ vulnerable fibers and the risk of physical stress on
 the bundle. The shorter fibers will have less 
 attenuation, and likely less degradation in attenuation 
 over time. And given that the optics and microscope 
-are fixed to the head, the optical commutator and 
-need to correct rotational motion would both be 
-eliminated (an electric commutator or wireless miniature 
+are fixed to the head, this would eliminate the need for 
+both the optical commutator and the need to correct 
+rotational motion (an electric commutator or wireless miniature 
 microscope would still be needed). Overall, a head-mounted 
 recording configuration has tremendous potential for 
 longitudinally interfacing with awake behaving animals, 
