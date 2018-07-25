@@ -135,15 +135,53 @@ The breakdown of the fluorescence signals recording by an average fiber is shown
 \label{fig:signals}
 \end{figure}
 
-In order to assess the performance of the source separation, the separated signals must be compared to all underlying neural activity signals to see if the extracted signals correspond with those from underlying individual neurons. We match extracted signals with underlying neural traces based on correlations. \Fref{fig:auc} compares the results of detecting threshold crossings in these separated signals with the results of detecting threshold crossings in the true, underlying neural activity, showing that by using a more strict correlation threshold for matching, we improve performance but at the expense of reducing the number of separated signals. 
+In order to assess the performance of the source separation, the 
+separated signals must be compared to all underlying neural activity 
+signals to see if the extracted signals correspond with the activity 
+of specific neurons. We match extracted signals with underlying neural
+ traces based on correlations; extracted signals having a sufficiently
+ high correlation ($r^2 \geq 0.6$) are considered an accurate match. 
+\Fref{fig:robust} compares the percentage of extracted traces that are accurate
+ matches for three scenarios, under a number of different model 
+parameters (fiber counts and neural firing rate). First, we show a 
+control comparing with novel neural traces, confirming that identified
+ accurate matches are not simply a probabilistic result of the large 
+neural population being modeled; with novel data, none of the traces 
+accurately match, indicating that matches are not false positives. 
+Next, we assess accurate matches between the signals recorded via the 
+fibers (without any source separation) and the underlying neural 
+traces; as suggested by the earlier modeling, some fibers are 
+dominated by 1 or 2 neurons, and produce accurate matches without 
+additional processing. Finally, applying the nonnegative independent 
+component analysis produces the highest percentage of accurate matches
+ across parameters.
 
 \begin{figure}
-\includegraphics[width=\textwidth]{fig8-auc.eps}
-\caption[Performance of source separation on threshold crossing task]{By increasing the r$^2$ threshold used to match separated signals with underlying neural activity, we observe an increase in accuracy in spike detection based on threshold crossing for spike detection, but a decrease in the number of matched neuronal signals. By altering the spike detection threshold, we can generate a receiver operating characteristic curve measuring the accuracy of the spike detection algorithm. Using different r$^2$ thresholds to match separated signals with the simulated neural fluorescence traces, we can generate different ROC curves. By lowering the r$^2$ threshold, we match more traces (N), but sacrifice accuracy (measured as area under the curve, or AUC). Average of five simulation based on 100 fibers with a splay of $\sigma$ = 125~\si{\micro\meter} in a region with a cell density of 250,000 neurons per mm$^3$.}
-\label{fig:auc}
+\includegraphics[width=\textwidth]{fig8-robust.eps}
+\caption[Fraction of accurately matched signals across parameters]{Percentage of extracted signals that accurately match an underlying neuron, based on a correlation of $r^2 \geq 0.6$. The first column (blue) is a control, showing no accurate matches when comparing fiber intensity with unrelated neural activity. The second column (red) shows the accuracy of the raw fiber intensity values; as some fibers are dominated by 1--2 neurons, there is a high percentage of traces that closely match underlying neurons. The third column (yellow) demonstrates the benefit of blind source separation, increase the number of accurately extract signals. These results are consistent and robust across various model parameters, including number of fibers and neural firing rates. Error bar shows std. dev. over 3 iterations.}
+\label{fig:robust}
 \end{figure}
 
-As a control, the same threshold crossing detection was repeated comparing the separated signals to unrelated, novel random traces. The area under the curve (AUC) was between 0.5--0.51 for all r$^2$ thresholds (not pictured), consistent with the lack of a relationship between the ground truth and separated signals.
+Because this sort of evaluation may be sensitive to the $r^2$ 
+threshold, we also evaluated the utility of the matched traces for 
+different thresholds. A receiver operating characteristic curve 
+(\fref{fig:auc}) evaluates the performance of using accurately matched, 
+separated signals to detect action potentials (via threshold crossing)
+ for a range of $r^2$ thresholds. As the $r^2$ accuracy threshold 
+increases, the matched separated signals provide a more useful input 
+for threshold detection, at the expense of reducing the number of 
+separated signals. These results motivated the selected threshold of 
+0.6. As a control, the same threshold crossing detection was repeated 
+comparing the separated signals to unrelated, novel random traces. The
+ area under the curve (AUC) was between 0.5--0.51 for all $r^2$ 
+thresholds (not pictured), consistent with the lack of a relationship 
+between the ground truth and separated signals.
+
+\begin{figure}
+\includegraphics[width=\textwidth]{fig9-auc.eps}
+\caption[Performance of source separation on threshold crossing task]{By increasing the $r^2$ threshold used to match separated signals with underlying neural activity, we observe an increase in accuracy in spike detection based on threshold crossing for spike detection, but a decrease in the number of matched neuronal signals. By altering the spike detection threshold, we can generate a receiver operating characteristic curve measuring the accuracy of the spike detection algorithm. Using different $r^2$ thresholds to match separated signals with the simulated neural fluorescence traces, we can generate different ROC curves. By lowering the $r^2$ threshold, we match more traces (N), but sacrifice accuracy (measured as area under the curve, or AUC). Average of five simulation based on 100 fibers with a splay of $\sigma$ = 125~\si{\micro\meter} in a region with a cell density of 250,000 neurons per mm$^3$.}
+\label{fig:auc}
+\end{figure}
 
 \section{Discussion}
 
@@ -162,7 +200,7 @@ Similar techniques and model constraints are frequently used in traditional calc
 
 In exploring source separation techniques, we also looked at what factors impact the source separation performance. Unsurprisingly, increased recording duration improves the performance. More relevantly though, source separation performance is best with sparse signals (low spiking frequency and fast time course fluorescent indicators, such as GCaMP6f). Such sparse signals provide discrete, differentiable events that are conducive to estimating the underlying mixing process.
 
-To evaluate the performance of the source separation for a realistic analysis task, we compared spike detection analysis on the separated signals and on the true, underlying neural traces. Separated signals are first matched with the underlying neural traces based on correlations; the majority of the separated signals have a strong correlation (r$^2$ $>$ 0.6) with one of the true neural traces, and as a result, achieves a high level of accuracy in the threshold crossing task. Of course, analysis of real world data would not have the benefit of being able to identify the extracted signals that match the underlying neural activity, but these results suggest that the hundreds or thousands of channels of data collected through the fiber bundle have the potential to reveal neuron-level dynamics of interest.
+To evaluate the performance of the source separation for a realistic analysis task, we compared spike detection analysis on the separated signals and on the true, underlying neural traces. Separated signals are first matched with the underlying neural traces based on correlations; the majority of the separated signals have a strong correlation ($r^2$ $>$ 0.6) with one of the true neural traces, and as a result, achieves a high level of accuracy in the threshold crossing task. Of course, analysis of real world data would not have the benefit of being able to identify the extracted signals that match the underlying neural activity, but these results suggest that the hundreds or thousands of channels of data collected through the fiber bundle have the potential to reveal neuron-level dynamics of interest.
 
 Further work can look at incorporating additional information into the source separation process. For example, it may be possible to estimate the initial mixing matrix through empirical measurement of correlations between fibers. Specifically, by shining light down a single fiber and looking at light collected by the other fibers, it may be possible to estimate the relative spatial configuration of the fibers and, as a result, the correlations that we would expect in the linear mixing process.
 
